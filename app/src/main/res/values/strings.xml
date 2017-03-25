@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PayWatch</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_ok_close">OK \u0026 Close</string>
+    <string name="menu_overview">Overview</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_settings">Settings</string>
 </resources>
