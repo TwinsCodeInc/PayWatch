@@ -1,10 +1,20 @@
 package cz.muni.fi.paywatch;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class AddFragment extends Fragment {
 
@@ -12,8 +22,33 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add, container, false);
 
-//        TextView tv = (TextView) v.findViewById(R.id.tvFragFirst);
-//        tv.setText(getArguments().getString("msg"));
+        // Select text in value_edit
+        final EditText editValue = (EditText) v.findViewById(R.id.edit_value);
+        editValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editValue.selectAll();
+            }
+        });
+
+        // Set current date
+        final EditText editDate = (EditText) v.findViewById(R.id.edit_date);
+        String formattedDate = new SimpleDateFormat("dd. MM. yyyy").format(Calendar.getInstance().getTime());
+        editDate.setText(formattedDate);
+        // Show calendar on click on date edit
+        final Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        editDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        editDate.setText("datum zvoleny");
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
 
         return v;
     }

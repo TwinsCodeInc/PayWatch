@@ -9,7 +9,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        // Set default bottom action
+
+        // Set default bottom bar navigation action
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
     }
 
