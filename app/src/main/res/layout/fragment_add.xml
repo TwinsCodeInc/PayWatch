@@ -45,16 +45,18 @@
             android:id="@+id/layout_btn"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:layout_alignParentBottom="true">
+            android:orientation="horizontal">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_ok"
                 android:text="@string/btn_ok"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_ok_close"
                 android:text="@string/btn_ok_close"/>
