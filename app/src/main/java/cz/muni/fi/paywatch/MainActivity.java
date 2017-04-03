@@ -39,18 +39,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Find views by ID
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         // Set default page
         mViewPager.setCurrentItem(1);
 
+        // Swipe listener
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            private int previousState;
+            private boolean userScrollChange;
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (userScrollChange) {
+                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (previousState == ViewPager.SCROLL_STATE_DRAGGING
+                        && state == ViewPager.SCROLL_STATE_SETTLING)
+                    userScrollChange = true;
+
+                else if (previousState == ViewPager.SCROLL_STATE_SETTLING
+                        && state == ViewPager.SCROLL_STATE_IDLE)
+                    userScrollChange = false;
+
+                previousState = state;
+            }
+        });
+
         // Bottom navigation listener
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
