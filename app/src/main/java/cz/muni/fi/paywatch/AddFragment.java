@@ -2,6 +2,7 @@ package cz.muni.fi.paywatch;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +23,16 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add, container, false);
 
-        // Select text in value_edit
+        // Find views by ID
         final EditText editValue = (EditText) v.findViewById(R.id.edit_value);
+        final EditText editDate = (EditText) v.findViewById(R.id.edit_date);
+        final TabLayout tabSelector = (TabLayout) v.findViewById(R.id.tab_selector);
+
+        // Set selector tabs - Expense and Income
+        tabSelector.addTab(tabSelector.newTab().setText("Expense"));
+        tabSelector.addTab(tabSelector.newTab().setText("Income"));
+
+        // Select text in value_edit
         editValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,7 +41,6 @@ public class AddFragment extends Fragment {
         });
 
         // Set current date
-        final EditText editDate = (EditText) v.findViewById(R.id.edit_date);
         String formattedDate = new SimpleDateFormat("dd. MM. yyyy").format(Calendar.getInstance().getTime());
         editDate.setText(formattedDate);
         // Show calendar on click on date edit
