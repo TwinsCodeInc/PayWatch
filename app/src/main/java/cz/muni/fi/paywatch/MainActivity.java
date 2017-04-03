@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (userScrollChange) {
-                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                }
             }
 
             @Override
             public void onPageSelected(int position) {
+                if (userScrollChange) {
+                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                }
             }
 
             @Override
