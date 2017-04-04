@@ -1,4 +1,4 @@
-package cz.muni.fi.paywatch;
+package cz.muni.fi.paywatch.adapters;
 
 /**
  * Created by Daniel on 3. 4. 2017.
@@ -9,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.AddFragment;
-import cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.OverviewFragment;
-import cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.SettingsFragment;
+import cz.muni.fi.paywatch.Constants;
+import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.fragments.AddFragment;
+import cz.muni.fi.paywatch.fragments.OverviewFragment;
+import cz.muni.fi.paywatch.fragments.SettingsFragment;
 
 
 /**
@@ -31,9 +33,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        if (position == 0) {
+        if (position == Constants.F_OVERVIEW) {
             return OverviewFragment.newInstance();
-        } else if (position == 2) {
+        } else if (position == Constants.F_SETTINGS) {
             return SettingsFragment.newInstance();
         }
         return AddFragment.newInstance();
@@ -48,11 +50,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
+            case Constants.F_OVERVIEW:
                 return context.getResources().getString(R.string.menu_overview);
-            case 1:
+            case Constants.F_ADD:
                 return context.getResources().getString(R.string.menu_add);
-            case 2:
+            case Constants.F_SETTINGS:
                 return context.getResources().getString(R.string.menu_settings);
         }
         return null;

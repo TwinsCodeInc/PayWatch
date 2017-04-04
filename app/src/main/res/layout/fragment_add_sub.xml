@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cz.muni.fi.paywatch.fragments.AddSubFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_value"
+            android:text="0.00"
+            android:selectAllOnFocus="true"
+            android:clickable="true"
+            android:inputType="numberDecimal"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spin_category"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:textIsSelectable="false"
+            android:focusable="false"
+            android:id="@+id/edit_date"/>
+
+        <LinearLayout
+            android:id="@+id/layout_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_ok"
+                android:text="@string/f_add_btn_ok"/>
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_ok_close"
+                android:text="@string/f_add_btn_ok_close"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

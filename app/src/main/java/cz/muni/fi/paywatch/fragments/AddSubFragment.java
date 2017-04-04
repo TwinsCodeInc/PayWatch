@@ -1,38 +1,49 @@
-package cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments;
+package cz.muni.fi.paywatch.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.TimeZone;
 
+import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 
-public class AddFragment extends Fragment {
+public class AddSubFragment extends Fragment {
+
+    private int subFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_add, container, false);
+        View v = inflater.inflate(R.layout.fragment_add_sub, container, false);
+
+        // Set the type of current instance (EXPENSE or INCOME)
+        subFragment = getArguments().getInt("subFragment", 0);
 
         // Find views by ID
         final EditText editValue = (EditText) v.findViewById(R.id.edit_value);
         final TextView editDate = (TextView) v.findViewById(R.id.edit_date);
-        final TabLayout tabSelector = (TabLayout) v.findViewById(R.id.tab_selector);
+        final Button btnOk = (Button) v.findViewById(R.id.btn_ok);
 
-        // Set selector tabs - Expense and Income
-        tabSelector.addTab(tabSelector.newTab().setText(R.string.f_add_expense));
-        tabSelector.addTab(tabSelector.newTab().setText(R.string.f_add_income));
+        // On OK click
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (subFragment == Constants.FSUB_EXPENSE) {
+                    Toast.makeText(getActivity(), "save expense", Toast.LENGTH_SHORT).show();
+                } else if (subFragment == Constants.FSUB_INCOME) {
+                    Toast.makeText(getActivity(), "save income", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         // Select text in value_edit
         editValue.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +80,11 @@ public class AddFragment extends Fragment {
         return v;
     }
 
-    public static AddFragment newInstance() {
-        AddFragment f = new AddFragment();
+    public static AddSubFragment newInstance(int subFragment) {
+        AddSubFragment f = new AddSubFragment();
+        Bundle b = new Bundle();
+        b.putInt("subFragment", subFragment);
+        f.setArguments(b);
         return f;
     }
 

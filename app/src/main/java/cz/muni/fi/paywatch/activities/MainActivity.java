@@ -1,4 +1,4 @@
-package cz.muni.fi.paywatch.cz.muni.fi.paywatch.activities;
+package cz.muni.fi.paywatch.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,11 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
+import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
-import cz.muni.fi.paywatch.SectionsPagerAdapter;
+import cz.muni.fi.paywatch.adapters.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
         // Set up the ViewPager with the sections adapter.
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        // Set default page
-        mViewPager.setCurrentItem(1);
+        // Set default fragment
+        mViewPager.setCurrentItem(Constants.F_ADD);
 
         // Swipe listener
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -89,16 +89,13 @@ public class MainActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_overview:
-                        // Switch to page one
-                        mViewPager.setCurrentItem(0);
+                        mViewPager.setCurrentItem(Constants.F_OVERVIEW);
                         break;
                     case R.id.action_add:
-                        // Switch to page two
-                        mViewPager.setCurrentItem(1);
+                        mViewPager.setCurrentItem(Constants.F_ADD);
                         break;
                     case R.id.action_settings:
-                        // Switch to page three
-                        mViewPager.setCurrentItem(2);
+                        mViewPager.setCurrentItem(Constants.F_SETTINGS);
                         break;
                 }
                 return true;
