@@ -9,6 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.AddFragment;
+import cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.OverviewFragment;
+import cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.SettingsFragment;
+
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -28,11 +32,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         if (position == 0) {
-            return OverviewFragment.newInstance("some parameter");
+            return OverviewFragment.newInstance();
         } else if (position == 2) {
-            return SettingsFragment.newInstance("some parameter");
+            return SettingsFragment.newInstance();
         }
-        return AddFragment.newInstance("some parameter");
+        return AddFragment.newInstance();
     }
 
     @Override

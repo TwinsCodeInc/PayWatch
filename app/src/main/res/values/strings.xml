@@ -1,13 +1,24 @@
 <resources>
     <string name="app_name">PayWatch</string>
 
-    <string name="btn_ok">OK</string>
-    <string name="btn_ok_close">OK \u0026 Close</string>
+    <!--Main activity-->
     <string name="menu_overview">Overview</string>
     <string name="menu_add">Add</string>
     <string name="menu_settings">Settings</string>
 
+    <!--Navigation drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--Navigation menu-->
+    <string name="navigation_subtitle">Operations</string>
+    <string name="navigation_add_account">Add account</string>
+    <string name="navigation_transfer">Transfer</string>
+
+    <!--Fragment ADD-->
+    <string name="f_add_btn_ok">OK</string>
+    <string name="f_add_btn_ok_close">OK \u0026 Close</string>
+    <string name="f_add_expense">Expense</string>
+    <string name="f_add_income">Income</string>
 
 </resources>

@@ -1,10 +1,12 @@
-package cz.muni.fi.paywatch;
+package cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import cz.muni.fi.paywatch.R;
 
 public class OverviewFragment extends Fragment {
 
@@ -18,12 +20,8 @@ public class OverviewFragment extends Fragment {
         return v;
     }
 
-    public static OverviewFragment newInstance(String text) {
+    public static OverviewFragment newInstance() {
         OverviewFragment f = new OverviewFragment();
-        Bundle b = new Bundle();
-        b.putString("msg", text);
-        f.setArguments(b);
-
         return f;
     }
 }

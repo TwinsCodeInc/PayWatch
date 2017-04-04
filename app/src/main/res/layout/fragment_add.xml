@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cz.muni.fi.paywatch.AddFragment">
+    tools:context="cz.muni.fi.paywatch.cz.muni.fi.paywatch.fragments.AddFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -32,11 +32,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/spin_category"/>
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:inputType="date"
             android:textIsSelectable="false"
             android:focusable="false"
             android:id="@+id/edit_date"/>
@@ -52,14 +51,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_ok"
-                android:text="@string/btn_ok"/>
+                android:text="@string/f_add_btn_ok"/>
 
             <Button
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_ok_close"
-                android:text="@string/btn_ok_close"/>
+                android:text="@string/f_add_btn_ok_close"/>
 
         </LinearLayout>
 
