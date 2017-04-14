@@ -16,17 +16,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-public class OverviewFragment extends Fragment {
-
-
-    Realm realm;
-
-    @Override
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        Realm.init(this.getContext());
-        realm = Realm.getDefaultInstance();
-    }
+public class OverviewFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,9 +40,4 @@ public class OverviewFragment extends Fragment {
         return f;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        realm.close();
-    }
 }

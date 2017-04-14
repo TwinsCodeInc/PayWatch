@@ -20,18 +20,9 @@ import cz.muni.fi.paywatch.Model.Entry;
 import cz.muni.fi.paywatch.R;
 import io.realm.Realm;
 
-public class AddSubFragment extends Fragment {
+public class AddSubFragment extends BaseFragment {
 
     private int subFragment;
-
-    Realm realm;
-
-    @Override
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        Realm.init(this.getContext());
-        realm = Realm.getDefaultInstance();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,11 +99,4 @@ public class AddSubFragment extends Fragment {
         f.setArguments(b);
         return f;
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        realm.close();
-    }
-
 }

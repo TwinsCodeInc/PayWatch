@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import cz.muni.fi.paywatch.R;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
