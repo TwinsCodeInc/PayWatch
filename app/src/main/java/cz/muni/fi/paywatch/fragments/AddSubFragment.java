@@ -13,13 +13,25 @@ import android.widget.Toast;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import cz.muni.fi.paywatch.Constants;
+import cz.muni.fi.paywatch.Model.Entry;
 import cz.muni.fi.paywatch.R;
+import io.realm.Realm;
 
 public class AddSubFragment extends Fragment {
 
     private int subFragment;
+
+    Realm realm;
+
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        Realm.init(this.getContext());
+        realm = Realm.getDefaultInstance();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,11 +49,20 @@ public class AddSubFragment extends Fragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date date = new java.util.Date();
+                Double sum = Double.parseDouble(editValue.getText().toString());
                 if (subFragment == Constants.FSUB_EXPENSE) {
-                    Toast.makeText(getActivity(), "save expense", Toast.LENGTH_SHORT).show();
-                } else if (subFragment == Constants.FSUB_INCOME) {
-                    Toast.makeText(getActivity(), "save income", Toast.LENGTH_SHORT).show();
+                    sum *= -1;
                 }
+                Integer categoryId = 1;
+                Integer accountId = 1;
+
+                realm.beginTransaction();
+                final Entry realmEntry = realm.copyToRealm(new Entry(sum, date, categoryId, accountId));
+                realm.commitTransaction();
+
+                editValue.setText("0.00");
+
             }
         });
 
@@ -86,6 +107,12 @@ public class AddSubFragment extends Fragment {
         b.putInt("subFragment", subFragment);
         f.setArguments(b);
         return f;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
 }
