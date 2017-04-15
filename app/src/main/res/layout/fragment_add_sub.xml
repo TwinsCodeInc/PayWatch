@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edit_value"
-            android:text="0.00"
+            android:text="@string/f_add_edit_value_def"
             android:selectAllOnFocus="true"
             android:clickable="true"
             android:inputType="numberDecimal"/>

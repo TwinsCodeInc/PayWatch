@@ -52,7 +52,7 @@ public class AddSubFragment extends BaseFragment {
                 final Entry realmEntry = realm.copyToRealm(new Entry(sum, date, categoryId, accountId));
                 realm.commitTransaction();
 
-                editValue.setText("0.00");
+                editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
 
             }
         });

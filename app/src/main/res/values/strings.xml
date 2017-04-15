@@ -20,6 +20,7 @@
     <string name="f_add_btn_ok_close">OK \u0026 Close</string>
     <string name="f_add_expense">Expense</string>
     <string name="f_add_income">Income</string>
+    <string name="f_add_edit_value_def">0.00</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
