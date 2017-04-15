@@ -1,11 +1,15 @@
 package cz.muni.fi.paywatch.Model;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+
+import cz.muni.fi.paywatch.R;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 
@@ -14,29 +18,39 @@ import io.realm.RealmBaseAdapter;
  */
 public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter {
 
-    private static class ViewHolder {
-        TextView text;
-    }
 
-    public EntryAdapter(OrderedRealmCollection<Entry> realmResults) {
+    TextView txtFirst;
+    TextView txtSecond;
+    TextView txtThird;
+    Activity activity;
+
+    public EntryAdapter(Activity activity, OrderedRealmCollection<Entry> realmResults) {
         super(realmResults);
+        this.activity = activity;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
-            viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView.findViewById(android.R.id.text1);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+
+        LayoutInflater inflater=activity.getLayoutInflater();
+
+        if(convertView == null){
+
+            convertView=inflater.inflate(R.layout.list_overview, null);
+
+            txtFirst=(TextView) convertView.findViewById(R.id.date);
+            txtSecond=(TextView) convertView.findViewById(R.id.sum);
+            txtThird=(TextView) convertView.findViewById(R.id.category);
+
         }
+
 
         if (adapterData != null) {
             Entry entry = adapterData.get(position);
-            viewHolder.text.setText(entry.getSum().toString());
+            SimpleDateFormat format = new SimpleDateFormat("d.M.y");
+            txtFirst.setText(format.format(entry.getDate()));
+            txtSecond.setText(entry.getSum().toString());
+            txtThird.setText(entry.getCategory().toString());
         }
         return convertView;
     }

@@ -29,7 +29,7 @@ public class OverviewFragment extends BaseFragment {
         final ListView entryList = (ListView) v.findViewById(R.id.entry_list);
 
         RealmResults<Entry> entries = realm.where(Entry.class).findAllSorted("date", Sort.DESCENDING);
-        EntryAdapter adapter = new EntryAdapter(entries);
+        EntryAdapter adapter = new EntryAdapter(getActivity(), entries);
         entryList.setAdapter(adapter);
 
         return v;
