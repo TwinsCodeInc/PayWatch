@@ -35,25 +35,22 @@ public class AddSubFragment extends BaseFragment {
         final EditText editValue = (EditText) v.findViewById(R.id.edit_value);
         final TextView editDate = (TextView) v.findViewById(R.id.edit_date);
         final Button btnOk = (Button) v.findViewById(R.id.btn_ok);
+        final Button btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
 
         // On OK click
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date = new java.util.Date();
-                Double sum = Double.parseDouble(editValue.getText().toString());
-                if (subFragment == Constants.FSUB_EXPENSE) {
-                    sum *= -1;
-                }
-                Integer categoryId = 1;
-                Integer accountId = 1;
+                saveEntry(editValue);
+            }
+        });
 
-                realm.beginTransaction();
-                final Entry realmEntry = realm.copyToRealm(new Entry(sum, date, categoryId, accountId));
-                realm.commitTransaction();
-
-                editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
-
+        // On OK click
+        btnOkAndClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveEntry(editValue);
+                getActivity().finish();
             }
         });
 
@@ -90,6 +87,22 @@ public class AddSubFragment extends BaseFragment {
         });
 
         return v;
+    }
+
+    private void saveEntry(EditText editValue) {
+        Date date = new java.util.Date();
+        Double sum = Double.parseDouble(editValue.getText().toString());
+        if (subFragment == Constants.FSUB_EXPENSE) {
+            sum *= -1;
+        }
+        Integer categoryId = 1;
+        Integer accountId = 1;
+
+        realm.beginTransaction();
+        final Entry realmEntry = realm.copyToRealm(new Entry(sum, date, categoryId, accountId));
+        realm.commitTransaction();
+
+        editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
     }
 
     public static AddSubFragment newInstance(int subFragment) {
