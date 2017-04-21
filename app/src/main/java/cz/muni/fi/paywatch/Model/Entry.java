@@ -1,4 +1,4 @@
-package cz.muni.fi.paywatch.Model;
+package cz.muni.fi.paywatch.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package cz.muni.fi.paywatch.Model;
+package cz.muni.fi.paywatch.adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 
 import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.model.Entry;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 

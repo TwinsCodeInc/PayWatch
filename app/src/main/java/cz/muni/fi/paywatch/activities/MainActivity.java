@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.SectionsPagerAdapter;
+import cz.muni.fi.paywatch.custom.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    private CustomViewPager mViewPager;
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         // Find views by ID
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (CustomViewPager) findViewById(R.id.container);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         // Create the adapter that will return a fragment for each of the three
@@ -53,35 +54,8 @@ public class MainActivity extends AppCompatActivity
         // Set default fragment
         mViewPager.setCurrentItem(Constants.F_ADD);
 
-        // Swipe listener
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            private int previousState;
-            private boolean userScrollChange;
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (userScrollChange) {
-                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (previousState == ViewPager.SCROLL_STATE_DRAGGING
-                        && state == ViewPager.SCROLL_STATE_SETTLING)
-                    userScrollChange = true;
-
-                else if (previousState == ViewPager.SCROLL_STATE_SETTLING
-                        && state == ViewPager.SCROLL_STATE_IDLE)
-                    userScrollChange = false;
-
-                previousState = state;
-            }
-        });
+        // Disable swipe
+        mViewPager.setPagingEnabled(false);
 
         // Bottom navigation listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

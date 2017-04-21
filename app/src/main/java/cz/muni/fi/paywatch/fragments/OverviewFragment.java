@@ -1,18 +1,14 @@
 package cz.muni.fi.paywatch.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.List;
-
-import cz.muni.fi.paywatch.Model.Entry;
-import cz.muni.fi.paywatch.Model.EntryAdapter;
+import cz.muni.fi.paywatch.model.Entry;
+import cz.muni.fi.paywatch.adapters.EntryAdapter;
 import cz.muni.fi.paywatch.R;
-import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 

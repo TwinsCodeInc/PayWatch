@@ -9,7 +9,7 @@
     tools:context=".activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v4.view.ViewPager
+    <cz.muni.fi.paywatch.custom.CustomViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
