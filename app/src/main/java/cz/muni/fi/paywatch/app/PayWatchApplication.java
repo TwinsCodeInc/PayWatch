@@ -3,6 +3,7 @@ package cz.muni.fi.paywatch.app;
 import android.app.Application;
 
 import cz.muni.fi.paywatch.Constants;
+import cz.muni.fi.paywatch.model.Account;
 import cz.muni.fi.paywatch.model.Category;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -22,7 +23,7 @@ public class PayWatchApplication extends Application {
             public void execute(Realm realm) {
                 // Expense categories
                 int i = 0;
-                for (String cName : Constants.expenseCategories){
+                for (String cName : Constants.EXPENSE_CATEGORIES){
                     Category c = realm.createObject(Category.class, i);
                     c.setName(cName);
                     c.setType(Constants.CAT_TYPE_EXPENSE);
@@ -31,13 +32,22 @@ public class PayWatchApplication extends Application {
                 }
 
                 // Income categories
-                for (String cName : Constants.incomeCategories){
+                for (String cName : Constants.INCOME_CATEGORIES){
                     Category c = realm.createObject(Category.class, i);
                     c.setName(cName);
                     c.setType(Constants.CAT_TYPE_INCOME);
                     c.setUseCount(0);
                     i += 1;
                 }
+
+                // Accounts
+                i = 0;
+                for (String aName : Constants.ACCOUNTS){
+                    Account a = realm.createObject(Account.class, i);
+                    a.setName(aName);
+                    i += 1;
+                }
+
             }
         }).name(Realm.DEFAULT_REALM_NAME)
           .schemaVersion(0)

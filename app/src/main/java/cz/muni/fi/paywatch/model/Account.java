@@ -57,4 +57,5 @@ public class Account extends RealmObject {
     public void setCurrencyId(Integer currencyId) {
         this.currencyId = currencyId;
     }
+
 }

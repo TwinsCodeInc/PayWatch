@@ -20,6 +20,7 @@ import java.util.List;
 
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.activities.MainActivity;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
@@ -30,10 +31,14 @@ public class AddSubFragment extends BaseFragment {
     private EditText editValue;
     private TextView editDate;
     private Spinner spinCategory;
+    private MainActivity mainActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_sub, container, false);
+
+        // Get activity pointer
+        mainActivity = (MainActivity) getActivity();
 
         // Set the type of current instance (EXPENSE or INCOME)
         subFragment = getArguments().getInt("subFragment", 0);
@@ -121,8 +126,9 @@ public class AddSubFragment extends BaseFragment {
         }
         Category c = (Category) spinCategory.getSelectedItem();
         Integer categoryId = (c != null) ? c.getId() : 0;
-        Integer accountId = 1;
+        Integer accountId = mainActivity.getCurrentAccountId();
 
+        // Insert new entry into database
         RealmController.with(this).addEntry(new Entry(sum, date, categoryId, accountId));
 
         // Increment the number of use count for used category

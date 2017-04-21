@@ -17,9 +17,12 @@ public interface Constants {
     // Categories
     public static final int CAT_TYPE_EXPENSE = 0;
     public static final int CAT_TYPE_INCOME = 1;
-    public static final String expenseCategories[] = {"Bills", "Food", "Entertainment", "Travel",
+    public static final String EXPENSE_CATEGORIES[] = {"Bills", "Food", "Entertainment", "Travel",
                                                       "Transportation", "Hobbies", "Gifts", "Clothing", "Other"};
-    public static final String incomeCategories[] = {"Extra", "Business", "Gifts", "Salary", "Loan"};
+    public static final String INCOME_CATEGORIES[] = {"Extra", "Business", "Gifts", "Salary", "Loan"};
 
-
+    // Accounts
+    public static final String ACCOUNTS[] = {"Wallet", "Bank Account"};
+    public static final int ITEM_ADD_ACCOUNT = 1001;
+    public static final int ITEM_TRANSFER = 1002;
 }
