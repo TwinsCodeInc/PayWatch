@@ -3,6 +3,7 @@ package cz.muni.fi.paywatch.model;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Jirka on 14.04.2017.

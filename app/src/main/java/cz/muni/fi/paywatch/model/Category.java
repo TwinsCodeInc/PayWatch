@@ -72,5 +72,9 @@ public class Category extends RealmObject {
     public void setUseCount(Integer useCount) {
         this.useCount = useCount;
     }
+
+    public void incrementUseCount() {
+        this.useCount += 1;
+    }
 }
 
