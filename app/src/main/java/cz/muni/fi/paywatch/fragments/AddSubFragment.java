@@ -29,6 +29,7 @@ public class AddSubFragment extends BaseFragment {
 
     private int subFragment;
     private EditText editValue;
+    private EditText editCurrency;
     private TextView editDate;
     private Spinner spinCategory;
     private MainActivity mainActivity;
@@ -46,6 +47,7 @@ public class AddSubFragment extends BaseFragment {
         // Find views by ID
         editValue = (EditText) v.findViewById(R.id.edit_value);
         editDate = (TextView) v.findViewById(R.id.edit_date);
+        editCurrency = (EditText) v.findViewById(R.id.edit_currency);
         final Button btnOk = (Button) v.findViewById(R.id.btn_ok);
         final Button btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
         spinCategory = (Spinner) v.findViewById(R.id.spin_category);
@@ -102,14 +104,21 @@ public class AddSubFragment extends BaseFragment {
     public void refreshControls() {
         // Set default value
         editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
+        // Set default currency
+        refreshCurrency();
         // Reload categories
-        loadCategories();
+        refreshCategories();
         // Set current date
         String formattedDate = new SimpleDateFormat("dd. MM. yyyy").format(Calendar.getInstance().getTime());
         editDate.setText(formattedDate);
     }
 
-    private void loadCategories() {
+    // Refresh the value of currency on ADD section
+    public void refreshCurrency() {
+        editCurrency.setText(RealmController.with(this).getAccountCurrency(mainActivity.getCurrentAccountId()));
+    }
+
+    private void refreshCategories() {
         // Load categories
         int catType = (subFragment == Constants.FSUB_EXPENSE) ? Constants.CAT_TYPE_EXPENSE : Constants.CAT_TYPE_INCOME;
         List<Category> items = RealmController.with(this).getCategories(catType);

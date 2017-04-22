@@ -92,6 +92,12 @@ public class RealmController {
         return items;
     }
 
+    // Returns count of accounts
+    public int getAccountsCount() {
+        RealmResults<Account> realmResults = realm.where(Account.class).findAll();
+        return realmResults.size();
+    }
+
     // Returns the next value for ID
     private Integer getAccountNextId() {
         return realm.where(Account.class).max("id").intValue() + 1;
@@ -113,4 +119,42 @@ public class RealmController {
         return realm.where(Account.class).equalTo("id", id).findFirst();
     }
 
+    // Returns list of accounts
+    public String getAccountCurrency(Integer id) {
+        return realm.where(Account.class).equalTo("id", id).findFirst().getCurrency();
+    }
+
+    // Updates account name
+    public void updateAccountName(Integer id, String name) {
+        realm.beginTransaction();
+        Account a = getAccount(id);
+        a.setName(name);
+        realm.copyToRealm(a);
+        realm.commitTransaction();
+    }
+
+    // Updates account currency
+    public void updateAccountCurrency(Integer id, String currency) {
+        realm.beginTransaction();
+        Account a = getAccount(id);
+        a.setCurrency(currency);
+        realm.copyToRealm(a);
+        realm.commitTransaction();
+    }
+
+    // Removes account
+    public void removeAccount(Integer id) {
+        realm.beginTransaction();
+        RealmResults<Entry> resultEntries = realm.where(Entry.class).equalTo("accountId", id).findAll();
+        resultEntries.deleteAllFromRealm();
+        RealmResults<Account> resultAccounts = realm.where(Account.class).equalTo("id", id).findAll();
+        resultAccounts.deleteAllFromRealm();
+        realm.commitTransaction();
+    }
+
+    // Returns count of entries withinn requested account
+    public int getEntriesCountForAccount(Integer id) {
+        RealmResults<Entry> resultEntries = realm.where(Entry.class).equalTo("accountId", id).findAll();
+        return resultEntries.size();
+    }
 }

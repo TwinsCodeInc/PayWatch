@@ -1,10 +1,14 @@
 package cz.muni.fi.paywatch.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ public class SettingsFragment extends BaseFragment {
     private MainActivity mainActivity;
     private TextView accNameView;
     private TextView accCurrencyView;
+    private Button accRemoveBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +33,31 @@ public class SettingsFragment extends BaseFragment {
 
         accNameView = (TextView) v.findViewById(R.id.acc_name);
         accCurrencyView = (TextView) v.findViewById(R.id.acc_currency);
+        accRemoveBtn = (Button) v.findViewById(R.id.acc_remove_btn);
+
+        // Listeners
+        accNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddAccountDialogName();
+            }
+        });
+        accCurrencyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddAccountDialogCurency();
+            }
+        });
+        accRemoveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RealmController.with(SettingsFragment.this).getAccountsCount() == 1) {
+                    Toast.makeText(getActivity(), R.string.sett_acc_remove_not_allowed, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                showAccountRemoveConfirmation();
+            }
+        });
 
         refreshControls();
 
@@ -50,4 +80,92 @@ public class SettingsFragment extends BaseFragment {
         SettingsFragment f = new SettingsFragment();
         return f;
     }
+
+    // Shows dialog for a new account name
+    public void showAddAccountDialogName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.acc_dialog_title);
+
+        // Set up the input
+        final EditText input = new EditText(getActivity());
+        input.setText(accNameView.getText());
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton(R.string.acc_dialog_btn_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = input.getText().toString().trim();
+                if (!name.isEmpty()) {
+                    RealmController.with(SettingsFragment.this).updateAccountName(mainActivity.getCurrentAccountId(), name);
+                    refreshAccount();
+                    mainActivity.refreshAccounts();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.acc_dialog_btn_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    // Shows dialog for a account currency
+    public void showAddAccountDialogCurency() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.acc_currency_dialog_title);
+
+        // Set up the input
+        final EditText input = new EditText(getActivity());
+        input.setText(accCurrencyView.getText());
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton(R.string.acc_dialog_btn_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String currency = input.getText().toString().trim();
+                if (!currency.isEmpty()) {
+                    RealmController.with(SettingsFragment.this).updateAccountCurrency(mainActivity.getCurrentAccountId(), currency);
+                    refreshAccount();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.acc_dialog_btn_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    // Shows dialog for a new account name
+    public void showAccountRemoveConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.sett_acc_remove_confirmation);
+
+        // Set up the buttons
+        builder.setPositiveButton(R.string.acc_dialog_btn_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                RealmController.with(SettingsFragment.this).removeAccount(mainActivity.getCurrentAccountId());
+                mainActivity.refreshAccounts();
+                refreshAccount();
+            }
+        });
+        builder.setNegativeButton(R.string.acc_dialog_btn_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
 }

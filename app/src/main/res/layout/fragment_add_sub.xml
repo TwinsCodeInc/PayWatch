@@ -12,13 +12,34 @@
         android:paddingRight="16dp"
         android:orientation="vertical" >
 
-        <EditText
-            android:layout_width="match_parent"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:id="@+id/edit_value"
-            android:text="@string/f_add_edit_value_def"
-            android:clickable="true"
-            android:inputType="numberDecimal"/>
+            android:layout_width="fill_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_value"
+                android:text="@string/f_add_edit_value_def"
+                android:textSize="28sp"
+                android:gravity="right"
+                android:clickable="true"
+                android:inputType="numberDecimal"/>
+
+            <EditText
+                android:layout_weight="1"
+                android:layout_width="140dp"
+                android:textSize="28sp"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:enabled="false"
+                android:id="@+id/edit_currency"/>
+
+        </LinearLayout>
 
         <Spinner
             android:layout_width="match_parent"
@@ -30,6 +51,7 @@
             android:layout_height="30dp"
             android:clickable="true"
             android:textIsSelectable="false"
+            android:textSize="28sp"
             android:focusable="false"
             android:id="@+id/edit_date"/>
 

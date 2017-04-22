@@ -28,16 +28,20 @@
 
     <!--Accounts-->
     <string name="hamburger_acc_label_main">Account balance: XXX</string>
-    <string name="hamburger_acc_label_sub">Currency: YYY</string>
+    <string name="hamburger_acc_label_sub">Currency</string>
     <string name="acc_dialog_title">Account name</string>
+    <string name="acc_currency_dialog_title">Currency</string>
     <string name="acc_dialog_btn_ok">OK</string>
     <string name="acc_dialog_btn_cancel">Cancel</string>
     <string name="acc_added">Account added</string>
 
     <!--Settings, Account-->
     <string name="sett_acc_title">Account</string>
-    <string name="sett_acc_name">Name</string>
-    <string name="sett_acc_currency">Currency</string>
-    <string name="sett_acc_color">Color</string>
+    <string name="sett_acc_name">Name:</string>
+    <string name="sett_acc_currency">Currency:</string>
+    <string name="sett_acc_color">Color:</string>
+    <string name="sett_acc_remove_btn">Remove account</string>
+    <string name="sett_acc_remove_confirmation">All the data from this account will be removed. Do you want to continue?</string>
+    <string name="sett_acc_remove_not_allowed">Account can not be removed. There must be always at least one account.</string>
 
 </resources>

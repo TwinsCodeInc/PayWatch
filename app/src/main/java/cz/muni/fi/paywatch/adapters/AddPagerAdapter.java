@@ -8,6 +8,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
@@ -21,10 +22,37 @@ import cz.muni.fi.paywatch.fragments.AddSubFragment;
 public class AddPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
+    private String expenseTag;
+    private String incomeTag;
 
     public AddPagerAdapter(FragmentManager fm, Context current) {
         super(fm);
         this.context = current;
+    }
+
+    public String getFragmentTag(int fragment) {
+        switch (fragment) {
+            case Constants.FSUB_EXPENSE:
+                return expenseTag;
+            case Constants.FSUB_INCOME:
+                return incomeTag;
+        }
+        return "";
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+        // get the tags set by FragmentPagerAdapter
+        switch (position) {
+            case Constants.FSUB_EXPENSE:
+                expenseTag = createdFragment.getTag();
+                break;
+            case Constants.FSUB_INCOME:
+                incomeTag = createdFragment.getTag();
+                break;
+        }
+        return createdFragment;
     }
 
     @Override

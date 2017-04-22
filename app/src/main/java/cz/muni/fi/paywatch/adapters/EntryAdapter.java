@@ -51,7 +51,7 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
             SimpleDateFormat format = new SimpleDateFormat("d.M.y");
             txtFirst.setText(format.format(entry.getDate()));
             txtSecond.setText(entry.getSum().toString());
-            txtThird.setText(entry.getCategory().toString());
+            txtThird.setText(entry.getCategoryId().toString());
         }
         return convertView;
     }

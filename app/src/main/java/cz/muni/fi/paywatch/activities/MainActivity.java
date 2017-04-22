@@ -14,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -24,6 +26,7 @@ import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.SectionsPagerAdapter;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.custom.CustomViewPager;
+import cz.muni.fi.paywatch.fragments.AddFragment;
 import cz.muni.fi.paywatch.fragments.AddSubFragment;
 import cz.muni.fi.paywatch.fragments.OverviewFragment;
 import cz.muni.fi.paywatch.fragments.SettingsFragment;
@@ -70,6 +73,9 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.action_add:
                         mViewPager.setCurrentItem(Constants.F_ADD);
+                        AddFragment fragmentAdd = (AddFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_ADD));
+                        AddSubFragment fragmentAddSub = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getCurrentSubFragmentTag());
+                        fragmentAddSub.refreshControls();
                         break;
                     case R.id.action_settings:
                         mViewPager.setCurrentItem(Constants.F_SETTINGS);
@@ -91,7 +97,13 @@ public class MainActivity extends AppCompatActivity
         // Set drawer layout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            public void onDrawerStateChanged(int newState) {
+                super.onDrawerStateChanged(newState);
+                // Refresh header labels
+                refreshHamburgerCurrencyLabel();
+            }
+        };
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -103,21 +115,27 @@ public class MainActivity extends AppCompatActivity
         // Refresh accounts in hamburger menu
         refreshAccounts();
 
-        // Set default bottom bar navigation action
-        MenuItem i = hamburgerMenu.getItem(0);  // first account
-        i.setChecked(true);
-        currentAccountId = i.getItemId();
-
     }
 
     // Refreshes the menu of accounts
-    private void refreshAccounts() {
+    public void refreshAccounts() {
+        boolean wasSelected = false;
         hamburgerMenu.clear();
         List<Account> items = RealmController.with(this).getAccounts();
         for (Account a : items) {
             hamburgerMenu.add(R.id.group_accounts, a.getId(), Menu.NONE, a.getName());
+            if (a.getId() == currentAccountId) {
+                hamburgerMenu.findItem(a.getId()).setChecked(true);
+                wasSelected = true;
+            }
         }
         hamburgerMenu.setGroupCheckable(R.id.group_accounts, true, true);
+        // If nothing was selected, select the first item
+        if (!wasSelected) {
+            MenuItem i = hamburgerMenu.getItem(0);  // first account
+            i.setChecked(true);
+            currentAccountId = i.getItemId();
+        }
         // Rest of the menu
         hamburgerMenu.add(R.id.group_operations, Constants.ITEM_ADD_ACCOUNT, Menu.NONE, R.string.navigation_add_account);
         hamburgerMenu.add(R.id.group_operations, Constants.ITEM_TRANSFER, Menu.NONE, R.string.navigation_transfer);
@@ -150,6 +168,13 @@ public class MainActivity extends AppCompatActivity
             // Refresh settings section
             SettingsFragment fragmentSettnigs = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
             fragmentSettnigs.refreshControls();
+            // Set default currency
+            AddFragment fragmentAdd = (AddFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_ADD));
+            AddSubFragment fragmentAddSubExpense = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_EXPENSE));
+            AddSubFragment fragmentAddSubIncome = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_INCOME));
+            // We need to refresh the currency on both fragments
+            fragmentAddSubExpense.refreshCurrency();
+            fragmentAddSubIncome.refreshCurrency();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -188,7 +213,21 @@ public class MainActivity extends AppCompatActivity
         builder.show();
     }
 
+    // Returns the currently selected account id
     public Integer getCurrentAccountId() {
         return currentAccountId;
     }
+
+    // Returns id of the current section / fragment
+    public int getCurrentSectionId() {
+        return mViewPager.getCurrentItem();
+    }
+
+    public void refreshHamburgerCurrencyLabel() {
+        TextView hamburgerCurrency = (TextView) findViewById(R.id.hamburger_currency_label);
+        if (hamburgerCurrency != null) {
+            hamburgerCurrency.setText(getResources().getString(R.string.hamburger_acc_label_sub) + ": " + RealmController.with(this).getAccountCurrency(getCurrentAccountId()));
+        }
+    }
+
 }

@@ -41,6 +41,14 @@ public class AddFragment extends BaseFragment {
        return v;
     }
 
+    public String getCurrentSubFragmentTag() {
+        return mAddPagerAdapter.getFragmentTag(mViewPager.getCurrentItem());
+    }
+
+    public String getSubFragmentTag(int fragment) {
+        return mAddPagerAdapter.getFragmentTag(fragment);
+    }
+
     public static AddFragment newInstance() {
         AddFragment f = new AddFragment();
         return f;
