@@ -31,6 +31,11 @@ public class OverviewFragment extends BaseFragment {
         return v;
     }
 
+    // Refresh all the data
+    public void refreshControls() {
+
+    }
+
     public static OverviewFragment newInstance() {
         OverviewFragment f = new OverviewFragment();
         return f;

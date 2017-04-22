@@ -34,4 +34,10 @@
     <string name="acc_dialog_btn_cancel">Cancel</string>
     <string name="acc_added">Account added</string>
 
+    <!--Settings, Account-->
+    <string name="sett_acc_title">Account</string>
+    <string name="sett_acc_name">Name</string>
+    <string name="sett_acc_currency">Currency</string>
+    <string name="sett_acc_color">Color</string>
+
 </resources>

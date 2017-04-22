@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +24,9 @@ import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.SectionsPagerAdapter;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.custom.CustomViewPager;
+import cz.muni.fi.paywatch.fragments.AddSubFragment;
+import cz.muni.fi.paywatch.fragments.OverviewFragment;
+import cz.muni.fi.paywatch.fragments.SettingsFragment;
 import cz.muni.fi.paywatch.model.Account;
 
 public class MainActivity extends AppCompatActivity
@@ -61,12 +65,16 @@ public class MainActivity extends AppCompatActivity
                 switch (item.getItemId()) {
                     case R.id.action_overview:
                         mViewPager.setCurrentItem(Constants.F_OVERVIEW);
+                        OverviewFragment fragmentOverview = (OverviewFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_OVERVIEW));
+                        fragmentOverview.refreshControls();
                         break;
                     case R.id.action_add:
                         mViewPager.setCurrentItem(Constants.F_ADD);
                         break;
                     case R.id.action_settings:
                         mViewPager.setCurrentItem(Constants.F_SETTINGS);
+                        SettingsFragment fragmentSettnigs = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
+                        fragmentSettnigs.refreshControls();
                         break;
                 }
                 return true;
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         // Set default bottom bar navigation action
-        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        bottomNavigationView.getMenu().getItem(Constants.F_ADD).setChecked(true);
 
         // Set toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         refreshAccounts();
 
         // Set default bottom bar navigation action
-        MenuItem i = hamburgerMenu.getItem(0);
+        MenuItem i = hamburgerMenu.getItem(0);  // first account
         i.setChecked(true);
         currentAccountId = i.getItemId();
 
@@ -139,7 +147,9 @@ public class MainActivity extends AppCompatActivity
         } else {
             // Set current account
             currentAccountId = id;
-            Toast.makeText(this, "account id: " + currentAccountId.toString(), Toast.LENGTH_SHORT).show();
+            // Refresh settings section
+            SettingsFragment fragmentSettnigs = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
+            fragmentSettnigs.refreshControls();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

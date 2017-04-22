@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 
 import java.util.List;
 
+import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.model.Account;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
@@ -101,9 +102,15 @@ public class RealmController {
         // TODO: fixnut defaultne hodnoty ake sa pouziju pri vytvoreni accountu
         realm.beginTransaction();
         Integer id = getAccountNextId();
-        Account a = new Account(id, name, "", 0);
+        Account a = new Account(id, name, "", Constants.DEFAULT_CURRENCY);
         realm.copyToRealm(a);
         realm.commitTransaction();
         return id;
     }
+
+    // Returns list of accounts
+    public Account getAccount(Integer id) {
+        return realm.where(Account.class).equalTo("id", id).findFirst();
+    }
+
 }

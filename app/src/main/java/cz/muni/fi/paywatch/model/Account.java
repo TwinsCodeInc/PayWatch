@@ -13,13 +13,13 @@ public class Account extends RealmObject {
     private Integer id;
     private String name;
     private String color;
-    private Integer currencyId;
+    private String currency;
 
-    public Account(Integer id, String name, String color, Integer currencyId) {
+    public Account(Integer id, String name, String color, String currency) {
         this.id = id;
         this.name = name;
         this.color = color;
-        this.currencyId = currencyId;
+        this.currency = currency;
     }
 
     public Account() {
@@ -38,8 +38,8 @@ public class Account extends RealmObject {
         return color;
     }
 
-    public Integer getCurrencyId() {
-        return currencyId;
+    public String getCurrency() {
+        return currency;
     }
 
     public void setId(Integer id) {
@@ -54,8 +54,8 @@ public class Account extends RealmObject {
         this.color = color;
     }
 
-    public void setCurrencyId(Integer currencyId) {
-        this.currencyId = currencyId;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
 }

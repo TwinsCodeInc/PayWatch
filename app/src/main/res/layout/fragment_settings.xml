@@ -2,12 +2,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cz.muni.fi.paywatch.fragments.SettingsFragment">
+    tools:context="cz.muni.fi.paywatch.fragments.SettingsFragment"
+    android:id="@+id/fragment_settings">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="settings fragment" />
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sett_acc_title"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="3">
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_rowSpan="1"
+                android:text="@string/sett_acc_name" />
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill_horizontal"
+                android:id="@+id/acc_name"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_rowSpan="1"
+                android:text="@string/sett_acc_currency" />
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill_horizontal"
+                android:id="@+id/acc_currency"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_rowSpan="1"
+                android:text="@string/sett_acc_color" />
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill_horizontal"
+                android:id="@+id/acc_color"
+                android:text="TODO"/>
+        </GridLayout>
+
+
+    </LinearLayout>
 
 </FrameLayout>

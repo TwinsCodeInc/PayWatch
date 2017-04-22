@@ -23,6 +23,7 @@ public interface Constants {
 
     // Accounts
     public static final String ACCOUNTS[] = {"Wallet", "Bank Account"};
+    public static final String DEFAULT_CURRENCY = "USD";
     public static final int ITEM_ADD_ACCOUNT = 1001;
     public static final int ITEM_TRANSFER = 1002;
 }

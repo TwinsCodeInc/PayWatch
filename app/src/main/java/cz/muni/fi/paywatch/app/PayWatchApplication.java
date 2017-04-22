@@ -45,6 +45,7 @@ public class PayWatchApplication extends Application {
                 for (String aName : Constants.ACCOUNTS){
                     Account a = realm.createObject(Account.class, i);
                     a.setName(aName);
+                    a.setCurrency(Constants.DEFAULT_CURRENCY);
                     i += 1;
                 }
 

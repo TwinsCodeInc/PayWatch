@@ -99,7 +99,7 @@ public class AddSubFragment extends BaseFragment {
     }
 
     // Refreshes all data and widgets that could be changed
-    private void refreshControls() {
+    public void refreshControls() {
         // Set default value
         editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
         // Reload categories
