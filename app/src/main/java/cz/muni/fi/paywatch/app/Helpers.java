@@ -30,11 +30,24 @@ public class Helpers {
         return dateFormat.format(Calendar.getInstance().getTime());
     }
 
+    // Returns formated string from date object
+    public static String getDateString(Date d) {
+        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(PayWatchApplication.getContext());
+        return dateFormat.format(d);
+    }
+
     // Returns formatted date string created from integer numbers of year, month and day (BEWARE: month numbers are 0-11)
     public static String intToDateString(int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(PayWatchApplication.getContext());
         Calendar c = Calendar.getInstance();
         c.set(year, monthOfYear, dayOfMonth);
         return dateFormat.format(c.getTime());
+    }
+
+    // Returns normalized (rounded) double
+    public static Double parseDouble(String value) {
+        Double d = Double.parseDouble(value);
+        d = Double.parseDouble(String.format("%.2f", d));
+        return d;
     }
 }

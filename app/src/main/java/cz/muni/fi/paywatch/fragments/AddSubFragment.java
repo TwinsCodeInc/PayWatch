@@ -60,9 +60,9 @@ public class AddSubFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 saveEntry();
-                //Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
                 // Reset widgets to the default state
-                //refreshControls();
+                refreshControls();
             }
         });
 
@@ -129,9 +129,15 @@ public class AddSubFragment extends BaseFragment {
     }
 
     private void saveEntry() {
+        // TODO: nedovolit zadavanie nulovych/zapornych hodnot
+        // Parse date
         Date date = Helpers.stringToDate(editDate.getText().toString());
-        if (date == null) return; // unable to parse date from string
-        Double sum = Double.parseDouble(editValue.getText().toString());
+        if (date == null) {
+            // TODO: Show error message
+            return; // unable to parse date from string
+        }
+        // Parse sum
+        Double sum = Helpers.parseDouble(editValue.getText().toString());
         if (subFragment == Constants.FSUB_EXPENSE) {
             sum *= -1;
         }
@@ -141,7 +147,6 @@ public class AddSubFragment extends BaseFragment {
 
         // Insert new entry into database
         RealmController.with(this).addEntry(new Entry(sum, date, categoryId, accountId));
-
         // Increment the number of use count for used category
         RealmController.with(this).incrementCategoryUseCount(categoryId);
     }

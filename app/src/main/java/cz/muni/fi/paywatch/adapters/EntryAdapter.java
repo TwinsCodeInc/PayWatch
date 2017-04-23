@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 
 import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.model.Entry;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
@@ -48,8 +49,7 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
 
         if (adapterData != null) {
             Entry entry = adapterData.get(position);
-            SimpleDateFormat format = new SimpleDateFormat("d.M.y");
-            txtFirst.setText(format.format(entry.getDate()));
+            txtFirst.setText(Helpers.getDateString(entry.getDate()));
             txtSecond.setText(entry.getSum().toString());
             txtThird.setText(entry.getCategoryId().toString());
         }
