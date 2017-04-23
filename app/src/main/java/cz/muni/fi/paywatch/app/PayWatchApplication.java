@@ -54,8 +54,8 @@ public class PayWatchApplication extends Application {
                 a.setName(Constants.ACCOUNT1_NAME);
                 a.setCurrency(Constants.ACCOUNT1_CURRENCY);
                 Account b = realm.createObject(Account.class, 1);
-                a.setName(Constants.ACCOUNT2_NAME);
-                a.setCurrency(Constants.ACCOUNT2_CURRENCY);
+                b.setName(Constants.ACCOUNT2_NAME);
+                b.setCurrency(Constants.ACCOUNT2_CURRENCY);
 
             }
         }).name(Realm.DEFAULT_REALM_NAME)

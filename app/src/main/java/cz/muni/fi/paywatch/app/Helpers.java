@@ -1,6 +1,7 @@
 package cz.muni.fi.paywatch.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
@@ -48,9 +49,15 @@ public class Helpers {
 
     // Returns normalized (rounded) double
     public static Double parseDouble(String value) {
-        Double d = Double.parseDouble(value);
-        d = Double.parseDouble(String.format("%.2f", d));
-        return d;
+        try {
+            Double d = Double.parseDouble(value);
+            d = Double.parseDouble(String.format("%.2f", d));
+            return d;
+        } catch (NumberFormatException e) {
+            return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     // Hides the keyboard
@@ -60,5 +67,14 @@ public class Helpers {
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    // Shows OK dialog
+    public static void showOkDialog(Activity activity, String title, String message) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle(title);
+        alert.setMessage(message);
+        alert.setPositiveButton("OK", null);
+        alert.show();
     }
 }

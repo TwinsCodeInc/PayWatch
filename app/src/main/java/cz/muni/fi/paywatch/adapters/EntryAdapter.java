@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.model.Entry;

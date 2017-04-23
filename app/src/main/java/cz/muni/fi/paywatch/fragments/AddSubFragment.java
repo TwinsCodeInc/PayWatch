@@ -66,10 +66,11 @@ public class AddSubFragment extends BaseFragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveEntry();
-                Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
-                // Reset widgets to the default state
-                refreshControls();
+                if (saveEntry()) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
+                    // Reset widgets to the default state
+                    refreshControls();
+                }
             }
         });
 
@@ -77,9 +78,10 @@ public class AddSubFragment extends BaseFragment {
         btnOkAndClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveEntry();
-                Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (saveEntry()) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                }
             }
         });
 
@@ -135,19 +137,25 @@ public class AddSubFragment extends BaseFragment {
         spinCategory.setSelection(0);
     }
 
-    private void saveEntry() {
-        // TODO: nedovolit zadavanie nulovych/zapornych hodnot
+    private boolean saveEntry() {
         // Parse date
         Date date = Helpers.stringToDate(editDate.getText().toString());
         if (date == null) {
-            // TODO: Show error message
-            return; // unable to parse date from string
+            Helpers.showOkDialog(mainActivity, getResources().getString(R.string.dialog_ok_warning_title),
+                    getResources().getString(R.string.dialog_ok_incorrect_date));
+            return false; // unable to parse date from string
         }
         // Parse sum
         Double sum = Helpers.parseDouble(editValue.getText().toString());
+        if (sum == null || sum == 0) {
+            Helpers.showOkDialog(mainActivity, getResources().getString(R.string.dialog_ok_warning_title),
+                    getResources().getString(R.string.dialog_ok_incorrect_value));
+            return false;
+        }
         if (subFragment == Constants.FSUB_EXPENSE) {
             sum *= -1;
         }
+        // Get other data
         Category c = (Category) spinCategory.getSelectedItem();
         Integer categoryId = (c != null) ? c.getId() : 0;
         Integer accountId = mainActivity.getCurrentAccountId();
@@ -156,6 +164,7 @@ public class AddSubFragment extends BaseFragment {
         RealmController.with(this).addEntry(new Entry(sum, date, categoryId, accountId));
         // Increment the number of use count for used category
         RealmController.with(this).incrementCategoryUseCount(categoryId);
+        return true;
     }
 
     public static AddSubFragment newInstance(int subFragment) {
