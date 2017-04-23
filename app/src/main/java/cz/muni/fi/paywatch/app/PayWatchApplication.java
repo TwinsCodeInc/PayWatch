@@ -1,6 +1,7 @@
 package cz.muni.fi.paywatch.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.model.Account;
@@ -13,9 +14,17 @@ import io.realm.RealmConfiguration;
  */
 
 public class PayWatchApplication extends Application {
+
+    private static Context mContext;
+
+    public static Context getContext() {
+        return mContext;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = getApplicationContext();
 
         Realm.init(getApplicationContext());
         RealmConfiguration config = new RealmConfiguration.Builder().initialData(new Realm.Transaction() {

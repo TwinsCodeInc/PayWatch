@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +23,7 @@ import java.util.List;
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.activities.MainActivity;
+import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
@@ -57,9 +60,9 @@ public class AddSubFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 saveEntry();
-                Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
                 // Reset widgets to the default state
-                refreshControls();
+                //refreshControls();
             }
         });
 
@@ -82,8 +85,7 @@ public class AddSubFragment extends BaseFragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                                String date = dayOfMonth+". "+(monthOfYear+1)+". "+year;
-                                editDate.setText(date);
+                                editDate.setText(Helpers.intToDateString(year, monthOfYear, dayOfMonth));
                             }
                         },
                         now.get(Calendar.YEAR),
@@ -109,8 +111,7 @@ public class AddSubFragment extends BaseFragment {
         // Reload categories
         refreshCategories();
         // Set current date
-        String formattedDate = new SimpleDateFormat("dd. MM. yyyy").format(Calendar.getInstance().getTime());
-        editDate.setText(formattedDate);
+        editDate.setText(Helpers.getActualDateString());
     }
 
     // Refresh the value of currency on ADD section
@@ -128,7 +129,8 @@ public class AddSubFragment extends BaseFragment {
     }
 
     private void saveEntry() {
-        Date date = new java.util.Date();
+        Date date = Helpers.stringToDate(editDate.getText().toString());
+        if (date == null) return; // unable to parse date from string
         Double sum = Double.parseDouble(editValue.getText().toString());
         if (subFragment == Constants.FSUB_EXPENSE) {
             sum *= -1;
