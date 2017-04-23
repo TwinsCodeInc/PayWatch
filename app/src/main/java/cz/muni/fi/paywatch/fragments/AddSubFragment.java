@@ -13,9 +13,6 @@ import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +51,16 @@ public class AddSubFragment extends BaseFragment {
         final Button btnOk = (Button) v.findViewById(R.id.btn_ok);
         final Button btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
         spinCategory = (Spinner) v.findViewById(R.id.spin_category);
+
+        // Clear edit when clicked into and value is 0
+        editValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editValue.getText().toString().equals(getResources().getString(R.string.f_add_edit_value_def))) {
+                    editValue.setText("");
+                }
+            }
+        });
 
         // On OK click
         btnOk.setOnClickListener(new View.OnClickListener() {
