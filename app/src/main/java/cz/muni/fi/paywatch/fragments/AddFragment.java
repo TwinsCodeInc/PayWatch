@@ -12,7 +12,7 @@ import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.AddPagerAdapter;
 import cz.muni.fi.paywatch.custom.CustomViewPager;
 
-public class AddFragment extends BaseFragment {
+public class AddFragment extends Fragment {
 
     private CustomViewPager mViewPager;
     private AddPagerAdapter mAddPagerAdapter;

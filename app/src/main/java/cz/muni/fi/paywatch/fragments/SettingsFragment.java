@@ -17,7 +17,7 @@ import cz.muni.fi.paywatch.activities.MainActivity;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Account;
 
-public class SettingsFragment extends BaseFragment {
+public class SettingsFragment extends Fragment {
 
     private MainActivity mainActivity;
     private TextView accNameView;

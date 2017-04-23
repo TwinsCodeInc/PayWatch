@@ -1,6 +1,7 @@
 package cz.muni.fi.paywatch.fragments;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
 
-public class AddSubFragment extends BaseFragment {
+public class AddSubFragment extends Fragment {
 
     private int subFragment;
     private EditText editValue;

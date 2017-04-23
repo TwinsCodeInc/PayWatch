@@ -28,7 +28,6 @@ public class RealmController {
     }
 
     public static RealmController with(Fragment fragment) {
-
         if (instance == null) {
             instance = new RealmController(fragment.getActivity().getApplication());
         }
@@ -36,7 +35,6 @@ public class RealmController {
     }
 
     public static RealmController with(Activity activity) {
-
         if (instance == null) {
             instance = new RealmController(activity.getApplication());
         }
@@ -44,7 +42,6 @@ public class RealmController {
     }
 
     public static RealmController with(Application application) {
-
         if (instance == null) {
             instance = new RealmController(application);
         }
@@ -52,12 +49,10 @@ public class RealmController {
     }
 
     public static RealmController getInstance() {
-
         return instance;
     }
 
     public Realm getRealm() {
-
         return realm;
     }
 
@@ -76,6 +71,12 @@ public class RealmController {
         RealmResults<Category> realmResults = realm.where(Category.class).equalTo("type", catType).findAllSorted("useCount", Sort.DESCENDING);
         List<Category> items = realm.copyFromRealm(realmResults);
         return items;
+    }
+
+    // Returns category name for its id
+    public String getCategoryName(Integer id) {
+        Category c = realm.where(Category.class).equalTo("id", id).findFirst();
+        return (c != null) ? c.getName() : "";
     }
 
     // Inserts new Entry object into database
@@ -121,7 +122,8 @@ public class RealmController {
 
     // Returns list of accounts
     public String getAccountCurrency(Integer id) {
-        return realm.where(Account.class).equalTo("id", id).findFirst().getCurrency();
+        Account a = realm.where(Account.class).equalTo("id", id).findFirst();
+        return (a != null) ? a.getCurrency() : "";
     }
 
     // Updates account name
@@ -156,5 +158,9 @@ public class RealmController {
     public int getEntriesCountForAccount(Integer id) {
         RealmResults<Entry> resultEntries = realm.where(Entry.class).equalTo("accountId", id).findAll();
         return resultEntries.size();
+    }
+
+    public RealmResults<Entry> getEntriesForAccount(Integer accountId) {
+        return realm.where(Entry.class).equalTo("accountId", accountId).findAllSorted("date", Sort.DESCENDING);
     }
 }

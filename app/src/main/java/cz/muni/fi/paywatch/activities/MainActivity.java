@@ -163,16 +163,19 @@ public class MainActivity extends AppCompatActivity
         } else {
             // Set current account
             currentAccountId = id;
-            // Refresh settings section
+            // Refresh SETTINGS section
             SettingsFragment fragmentSettnigs = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
             fragmentSettnigs.refreshControls();
-            // Set default currency
+            // Refresh ADD section
             AddFragment fragmentAdd = (AddFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_ADD));
             AddSubFragment fragmentAddSubExpense = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_EXPENSE));
             AddSubFragment fragmentAddSubIncome = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_INCOME));
             // We need to refresh the currency on both fragments
             fragmentAddSubExpense.refreshCurrency();
             fragmentAddSubIncome.refreshCurrency();
+            // Refresh OVERVIEW section
+            OverviewFragment fragmentOverview = (OverviewFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_OVERVIEW));
+            fragmentOverview.refreshControls();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

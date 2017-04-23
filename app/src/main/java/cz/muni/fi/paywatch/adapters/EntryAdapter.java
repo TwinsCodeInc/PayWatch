@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.app.Helpers;
+import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Entry;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
@@ -49,7 +50,7 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
             Entry entry = adapterData.get(position);
             txtFirst.setText(Helpers.getDateString(entry.getDate()));
             txtSecond.setText(entry.getSum().toString());
-            txtThird.setText(entry.getCategoryId().toString());
+            txtThird.setText(RealmController.with(activity).getCategoryName(entry.getCategoryId()));
         }
         return convertView;
     }
