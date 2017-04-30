@@ -2,6 +2,7 @@ package cz.muni.fi.paywatch.model;
 
 import java.util.Date;
 
+import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -24,6 +25,15 @@ public class Entry extends RealmObject {
         this.categoryId = categoryId;
         this.accountId = accountId;
         this.date = date;
+        Realm realm = Realm.getDefaultInstance();
+        Number nextId = realm.where(Entry.class).max("id");
+        if ( nextId == null ) {
+            this.id = 0;
+        } else {
+            this.id = nextId.intValue() + 1;
+        }
+        this.note = "";
+
     }
 
     public Entry() {
