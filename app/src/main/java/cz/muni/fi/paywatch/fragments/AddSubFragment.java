@@ -116,6 +116,7 @@ public class AddSubFragment extends Fragment {
     public void refreshControls() {
         // Set default value
         editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
+        editValue.setSelection(0,editValue.getText().toString().length());
         // Set default currency
         refreshCurrency();
         // Reload categories
