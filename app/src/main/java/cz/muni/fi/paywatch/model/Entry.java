@@ -11,9 +11,12 @@ import io.realm.annotations.PrimaryKey;
 
 public class Entry extends RealmObject {
 
+    @PrimaryKey
+    private Integer id;
     private Double sum;
     private Integer categoryId;
     private Integer accountId;
+    private String note;
     private Date date;
 
     public Entry(Double sum, Date date, Integer categoryId, Integer accountId ) {
@@ -39,10 +42,9 @@ public class Entry extends RealmObject {
         return accountId;
     }
 
-    public Date getDate() {
-        return date;
+    public String getNote() { return note; }
 
-    }
+    public Date getDate() { return date; }
 
     public void setSum(Double sum) {
         this.sum = sum;
@@ -58,6 +60,10 @@ public class Entry extends RealmObject {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
 
