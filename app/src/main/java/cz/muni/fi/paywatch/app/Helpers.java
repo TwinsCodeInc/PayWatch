@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,9 +51,9 @@ public class Helpers {
     // Returns normalized (rounded) double
     public static Double parseDouble(String value) {
         try {
-            Double d = Double.parseDouble(value);
-            d = Double.parseDouble(String.format("%.2f", d));
-            return d;
+            return Double.parseDouble(value);
+            //d = Double.parseDouble(String.format("%.2f", d));
+            //return d;
         } catch (NumberFormatException e) {
             return null;
         } catch (NullPointerException e) {
