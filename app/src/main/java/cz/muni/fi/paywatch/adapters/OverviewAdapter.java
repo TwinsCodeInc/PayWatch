@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.model.Entry;
 import cz.muni.fi.paywatch.viewholders.DefaultViewHolder;
+import cz.muni.fi.paywatch.viewholders.LineGraphViewHolder;
 import cz.muni.fi.paywatch.viewholders.SumViewHolder;
 import io.realm.RealmResults;
 
@@ -41,6 +42,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_item2, parent, false);
                 holder = new SumViewHolder(itemView, this);
                 break;
+            case 2 :
+                itemView = LayoutInflater.from(context).inflate(R.layout.overview_graph, parent, false);
+                holder = new LineGraphViewHolder(itemView, this);
+                break;
             default:
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_item, parent, false);
                 holder = new DefaultViewHolder(itemView, this);
@@ -60,9 +65,13 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 SumViewHolder holder2 = (SumViewHolder) holder;
                 configureSumViewHolder(holder2, position);
                 break;
+            case 2 :
+                LineGraphViewHolder holder3 = (LineGraphViewHolder) holder;
+                configureLineGraphViewHolder(holder3, position);
+                break;
             default :
-                DefaultViewHolder holder3 = (DefaultViewHolder) holder;
-                configureDefaultViewHolder(holder3, position);
+                DefaultViewHolder holderDef = (DefaultViewHolder) holder;
+                configureDefaultViewHolder(holderDef, position);
                 break;
 
         }
@@ -70,6 +79,9 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType (int position) {
+        if (position == 2) {
+            return 2;
+        }
         return position % 2;
     }
 
@@ -88,5 +100,12 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Entry entry = mItemList.get(position);
         holder.mTitle.setText(entry.getDate().toString());
     }
+
+    private void configureLineGraphViewHolder(LineGraphViewHolder holder, int position) {
+        //Entry entry = mItemList.get(position);
+        //holder.mTitle.setText(entry.getDate().toString());
+    }
+
+
 
 }
