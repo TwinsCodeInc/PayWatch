@@ -6,16 +6,13 @@
     tools:context="cz.muni.fi.paywatch.fragments.OverviewFragment"
     android:id="@+id/fragment_overview">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Last inserted items:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:scrollbars="vertical" />
 
-    <ListView
-        android:id="@+id/entry_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <!-- TODO: Update blank fragment layout -->
 
 </LinearLayout>
