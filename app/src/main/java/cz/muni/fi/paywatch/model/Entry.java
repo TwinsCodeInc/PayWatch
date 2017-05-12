@@ -20,7 +20,11 @@ public class Entry extends RealmObject {
     private String note;
     private Date date;
 
-    public Entry(Double sum, Date date, Integer categoryId, Integer accountId ) {
+    public Entry(Double sum, Date date, Integer categoryId, Integer accountId) {
+        this(sum, date, categoryId, accountId, "");
+    }
+
+    public Entry(Double sum, Date date, Integer categoryId, Integer accountId, String note) {
         this.sum = sum;
         this.categoryId = categoryId;
         this.accountId = accountId;
@@ -32,7 +36,7 @@ public class Entry extends RealmObject {
         } else {
             this.id = nextId.intValue() + 1;
         }
-        this.note = "";
+        this.note = note;
 
     }
 

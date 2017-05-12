@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">PayWatch</string>
 
+    <!--Initial expense categories-->
+    <string name="init_exp_cat1">Bills</string>
+    <string name="init_exp_cat2">Food</string>
+    <string name="init_exp_cat3">Entertainment</string>
+    <string name="init_exp_cat4">Travel</string>
+    <string name="init_exp_cat5">Transportation</string>
+    <string name="init_exp_cat6">Hobbies</string>
+    <string name="init_exp_cat7">Gifts</string>
+    <string name="init_exp_cat8">Clothing</string>
+    <string name="init_exp_cat9">Other</string>
+    <!--Initial income categories-->
+    <string name="init_inc_cat1">Extra</string>
+    <string name="init_inc_cat2">Business</string>
+    <string name="init_inc_cat3">Gifts</string>
+    <string name="init_inc_cat4">Salary</string>
+    <string name="init_inc_cat5">Loan</string>
+    <!--Initial account names-->
+    <string name="init_acc1">Wallet</string>
+    <string name="init_acc2">Bank Account</string>
+
     <!--Main activity-->
     <string name="menu_overview">Overview</string>
     <string name="menu_add">Add</string>
@@ -25,6 +45,7 @@
     <string name="f_add_income">Income</string>
     <string name="f_add_edit_value_def">0.00</string>
     <string name="f_add_toast_entry_added">Entry added</string>
+    <string name="f_add_note">Optional note</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

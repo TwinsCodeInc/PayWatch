@@ -57,6 +57,12 @@
             android:focusable="false"
             android:id="@+id/edit_date"/>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/f_add_note"
+            android:id="@+id/edit_note"/>
+
         <LinearLayout
             android:id="@+id/layout_btn"
             android:layout_height="wrap_content"

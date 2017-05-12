@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import cz.muni.fi.paywatch.Constants;
+import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.model.Account;
 import cz.muni.fi.paywatch.model.Category;
 import io.realm.Realm;
@@ -32,7 +33,17 @@ public class PayWatchApplication extends Application {
             public void execute(Realm realm) {
                 // Expense categories
                 int i = 0;
-                for (String cName : Constants.EXPENSE_CATEGORIES){
+                String expenseCategories[] = {getResources().getString(R.string.init_exp_cat1),
+                                              getResources().getString(R.string.init_exp_cat2),
+                                              getResources().getString(R.string.init_exp_cat3),
+                                              getResources().getString(R.string.init_exp_cat4),
+                                              getResources().getString(R.string.init_exp_cat5),
+                                              getResources().getString(R.string.init_exp_cat6),
+                                              getResources().getString(R.string.init_exp_cat7),
+                                              getResources().getString(R.string.init_exp_cat8),
+                                              getResources().getString(R.string.init_exp_cat9)};
+
+                for (String cName : expenseCategories){
                     Category c = realm.createObject(Category.class, i);
                     c.setName(cName);
                     c.setType(Constants.CAT_TYPE_EXPENSE);
@@ -41,7 +52,12 @@ public class PayWatchApplication extends Application {
                 }
 
                 // Income categories
-                for (String cName : Constants.INCOME_CATEGORIES){
+                String incomeCategories[] = {getResources().getString(R.string.init_inc_cat1),
+                                             getResources().getString(R.string.init_inc_cat2),
+                                             getResources().getString(R.string.init_inc_cat3),
+                                             getResources().getString(R.string.init_inc_cat4),
+                                             getResources().getString(R.string.init_inc_cat5)};
+                for (String cName : incomeCategories){
                     Category c = realm.createObject(Category.class, i);
                     c.setName(cName);
                     c.setType(Constants.CAT_TYPE_INCOME);
@@ -51,10 +67,10 @@ public class PayWatchApplication extends Application {
 
                 // Accounts
                 Account a = realm.createObject(Account.class, 0);
-                a.setName(Constants.ACCOUNT1_NAME);
+                a.setName(getResources().getString(R.string.init_acc1));
                 a.setCurrency(Constants.ACCOUNT1_CURRENCY);
                 Account b = realm.createObject(Account.class, 1);
-                b.setName(Constants.ACCOUNT2_NAME);
+                b.setName(getResources().getString(R.string.init_acc2));
                 b.setCurrency(Constants.ACCOUNT2_CURRENCY);
 
             }

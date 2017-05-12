@@ -22,9 +22,7 @@ public interface Constants {
     public static final String INCOME_CATEGORIES[] = {"Extra", "Business", "Gifts", "Salary", "Loan"};
 
     // Accounts
-    public static final String ACCOUNT1_NAME = "Wallet";
     public static final String ACCOUNT1_CURRENCY = "EUR";
-    public static final String ACCOUNT2_NAME = "Bank Account";
     public static final String ACCOUNT2_CURRENCY = "USD";
     public static final String DEFAULT_CURRENCY = "EUR";
     public static final int ITEM_ADD_ACCOUNT = 1001;

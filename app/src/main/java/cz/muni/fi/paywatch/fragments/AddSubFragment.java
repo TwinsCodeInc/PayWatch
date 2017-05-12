@@ -31,6 +31,7 @@ public class AddSubFragment extends Fragment {
     private int subFragment;
     private EditText editValue;
     private EditText editCurrency;
+    private EditText editNote;
     private TextView editDate;
     private Spinner spinCategory;
     private MainActivity mainActivity;
@@ -52,6 +53,7 @@ public class AddSubFragment extends Fragment {
         final Button btnOk = (Button) v.findViewById(R.id.btn_ok);
         final Button btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
         spinCategory = (Spinner) v.findViewById(R.id.spin_category);
+        editNote = (EditText) v.findViewById(R.id.edit_note);
 
         // Clear edit when clicked into and value is 0
         editValue.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +119,7 @@ public class AddSubFragment extends Fragment {
         // Set default value
         editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
         editValue.setSelection(0,editValue.getText().toString().length());
+        editNote.setText("");
         // Set default currency
         refreshCurrency();
         // Reload categories
@@ -161,9 +164,10 @@ public class AddSubFragment extends Fragment {
         Category c = (Category) spinCategory.getSelectedItem();
         Integer categoryId = (c != null) ? c.getId() : 0;
         Integer accountId = mainActivity.getCurrentAccountId();
+        String note = editNote.getText().toString().trim();
 
         // Insert new entry into database
-        RealmController.with(this).addEntry(new Entry(sum, date, categoryId, accountId));
+        RealmController.with(this).addEntry(new Entry(sum, date, categoryId, accountId, note));
         // Increment the number of use count for used category
         RealmController.with(this).incrementCategoryUseCount(categoryId);
         return true;
