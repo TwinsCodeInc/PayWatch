@@ -22,7 +22,7 @@
     <color name="blue_grey">#5E7C8B</color>
 
     <!--Custom colors-->
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#2962FF</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
     <color name="colorAccent">#FF4081</color>
 </resources>

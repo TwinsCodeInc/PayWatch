@@ -83,7 +83,6 @@ public class SettingsFragment extends Fragment {
                     }
                 });
                 cp.show();
-
             }
         });
 
