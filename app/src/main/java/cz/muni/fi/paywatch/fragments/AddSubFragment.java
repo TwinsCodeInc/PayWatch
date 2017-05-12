@@ -69,6 +69,7 @@ public class AddSubFragment extends Fragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Helpers.hideSoftKeyboard(getActivity());
                 if (saveEntry()) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.f_add_toast_entry_added), Toast.LENGTH_SHORT).show();
                     // Reset widgets to the default state
@@ -77,7 +78,7 @@ public class AddSubFragment extends Fragment {
             }
         });
 
-        // On OK click
+        // On OK and CLOSE click
         btnOkAndClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +93,7 @@ public class AddSubFragment extends Fragment {
         editDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Helpers.hideSoftKeyboard(getActivity());
                 Calendar now = Calendar.getInstance();
                 DatePickerDialog dpd = DatePickerDialog.newInstance(
                         new DatePickerDialog.OnDateSetListener() {

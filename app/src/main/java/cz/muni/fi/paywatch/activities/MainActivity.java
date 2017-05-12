@@ -22,6 +22,7 @@ import java.util.List;
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.SectionsPagerAdapter;
+import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.custom.CustomViewPager;
 import cz.muni.fi.paywatch.fragments.AddFragment;
@@ -77,8 +78,8 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.action_settings:
                         mViewPager.setCurrentItem(Constants.F_SETTINGS);
-                        SettingsFragment fragmentSettnigs = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
-                        fragmentSettnigs.refreshControls();
+                        SettingsFragment fragmentSettings = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
+                        fragmentSettings.refreshControls();
                         break;
                 }
                 return true;
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             public void onDrawerStateChanged(int newState) {
                 super.onDrawerStateChanged(newState);
+                // Hide keyboard
+                Helpers.hideSoftKeyboard(MainActivity.this);
                 // Refresh header labels
                 refreshHamburgerCurrencyLabel();
             }
@@ -164,8 +167,8 @@ public class MainActivity extends AppCompatActivity
             // Set current account
             currentAccountId = id;
             // Refresh SETTINGS section
-            SettingsFragment fragmentSettnigs = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
-            fragmentSettnigs.refreshControls();
+            SettingsFragment fragmentSettings = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
+            fragmentSettings.refreshControls();
             // Refresh ADD section
             AddFragment fragmentAdd = (AddFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_ADD));
             AddSubFragment fragmentAddSubExpense = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_EXPENSE));
