@@ -2,6 +2,7 @@ package cz.muni.fi.paywatch.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
@@ -69,9 +70,11 @@ public class PayWatchApplication extends Application {
                 Account a = realm.createObject(Account.class, 0);
                 a.setName(getResources().getString(R.string.init_acc1));
                 a.setCurrency(Constants.ACCOUNT1_CURRENCY);
+                a.setColor(ContextCompat.getColor(mContext, R.color.light_blue));
                 Account b = realm.createObject(Account.class, 1);
                 b.setName(getResources().getString(R.string.init_acc2));
                 b.setCurrency(Constants.ACCOUNT2_CURRENCY);
+                b.setColor(ContextCompat.getColor(mContext, R.color.lime));
 
             }
         }).name(Realm.DEFAULT_REALM_NAME)

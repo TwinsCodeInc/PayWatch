@@ -109,7 +109,7 @@ public class RealmController {
         // TODO: fixnut defaultne hodnoty ake sa pouziju pri vytvoreni accountu
         realm.beginTransaction();
         Integer id = getAccountNextId();
-        Account a = new Account(id, name, "", Constants.DEFAULT_CURRENCY);
+        Account a = new Account(id, name, 0, Constants.DEFAULT_CURRENCY);
         realm.copyToRealm(a);
         realm.commitTransaction();
         return id;
@@ -131,6 +131,15 @@ public class RealmController {
         realm.beginTransaction();
         Account a = getAccount(id);
         a.setName(name);
+        realm.copyToRealm(a);
+        realm.commitTransaction();
+    }
+
+    // Updates account color
+    public void updateAccountColor(Integer id, Integer color) {
+        realm.beginTransaction();
+        Account a = getAccount(id);
+        a.setColor(color);
         realm.copyToRealm(a);
         realm.commitTransaction();
     }

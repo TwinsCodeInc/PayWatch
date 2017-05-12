@@ -1,7 +1,9 @@
 package cz.muni.fi.paywatch.fragments;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -12,6 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
+import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
+
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.activities.MainActivity;
 import cz.muni.fi.paywatch.app.RealmController;
@@ -21,6 +26,7 @@ public class SettingsFragment extends Fragment {
 
     private MainActivity mainActivity;
     private TextView accNameView;
+    private TextView accColor;
     private TextView accCurrencyView;
     private Button accRemoveBtn;
 
@@ -34,6 +40,7 @@ public class SettingsFragment extends Fragment {
         accNameView = (TextView) v.findViewById(R.id.acc_name);
         accCurrencyView = (TextView) v.findViewById(R.id.acc_currency);
         accRemoveBtn = (Button) v.findViewById(R.id.acc_remove_btn);
+        accColor = (TextView) v.findViewById(R.id.acc_color);
 
         // Listeners
         accNameView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +65,27 @@ public class SettingsFragment extends Fragment {
                 showAccountRemoveConfirmation();
             }
         });
+        accColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int c = ((ColorDrawable) accColor.getBackground()).getColor();
+                int red = (c >> 16) & 0xff;
+                int green = (c >> 8) & 0xff;
+                int blue = c & 0xff;
+                final ColorPicker cp = new ColorPicker(getActivity(), red, green, blue);
+                // Set a new Listener called when user click "select"
+                cp.setCallback(new ColorPickerCallback() {
+                    @Override
+                    public void onColorChosen(@ColorInt int color) {
+                        RealmController.with(SettingsFragment.this).updateAccountColor(mainActivity.getCurrentAccountId(), color);
+                        refreshAccount();
+                        cp.dismiss();
+                    }
+                });
+                cp.show();
+
+            }
+        });
 
         refreshControls();
 
@@ -74,6 +102,7 @@ public class SettingsFragment extends Fragment {
         Account a = RealmController.with(this).getAccount(mainActivity.getCurrentAccountId());
         accNameView.setText(a.getName());
         accCurrencyView.setText(a.getCurrency());
+        accColor.setBackgroundColor(a.getColor());
     }
 
     public static SettingsFragment newInstance() {

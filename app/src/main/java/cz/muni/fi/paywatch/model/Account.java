@@ -12,10 +12,10 @@ public class Account extends RealmObject {
     @PrimaryKey
     private Integer id;
     private String name;
-    private String color;
+    private Integer color;
     private String currency;
 
-    public Account(Integer id, String name, String color, String currency) {
+    public Account(Integer id, String name, Integer color, String currency) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -34,7 +34,7 @@ public class Account extends RealmObject {
         return name;
     }
 
-    public String getColor() {
+    public Integer getColor() {
         return color;
     }
 
@@ -50,7 +50,7 @@ public class Account extends RealmObject {
         this.name = name;
     }
 
-    public void setColor(String color) {
+    public void setColor(Integer color) {
         this.color = color;
     }
 
