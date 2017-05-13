@@ -1,6 +1,7 @@
 package cz.muni.fi.paywatch.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -18,6 +19,7 @@ import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
 import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.activities.CategoriesActivity;
 import cz.muni.fi.paywatch.activities.MainActivity;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Account;
@@ -29,6 +31,8 @@ public class SettingsFragment extends Fragment {
     private TextView accColor;
     private TextView accCurrencyView;
     private Button accRemoveBtn;
+    private TextView catExpense;
+    private TextView catIncome;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class SettingsFragment extends Fragment {
         accCurrencyView = (TextView) v.findViewById(R.id.acc_currency);
         accRemoveBtn = (Button) v.findViewById(R.id.acc_remove_btn);
         accColor = (TextView) v.findViewById(R.id.acc_color);
+        catExpense = (TextView) v.findViewById(R.id.sett_cat_expense);
+        catIncome = (TextView) v.findViewById(R.id.sett_cat_income);
 
         // Listeners
         accNameView.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +89,13 @@ public class SettingsFragment extends Fragment {
                     }
                 });
                 cp.show();
+            }
+        });
+        catExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mainActivity, CategoriesActivity.class);
+                startActivity(intent);
             }
         });
 

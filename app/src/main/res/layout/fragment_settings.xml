@@ -22,7 +22,7 @@
 
         <GridLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:columnCount="2"
             android:orientation="horizontal"
             android:rowCount="3">
@@ -70,6 +70,23 @@
                 android:text="@string/sett_acc_remove_btn"/>
         </GridLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sett_cat_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="expense cat"
+            android:id="@+id/sett_cat_expense"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="income cat"
+            android:id="@+id/sett_cat_income"/>
 
     </LinearLayout>
 

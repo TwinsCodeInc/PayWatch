@@ -67,5 +67,9 @@
     <string name="sett_acc_remove_btn">Remove account</string>
     <string name="sett_acc_remove_confirmation">All the data from this account will be removed. Do you want to continue?</string>
     <string name="sett_acc_remove_not_allowed">Account can not be removed. There must be always at least one account.</string>
+    <string name="sett_cat_title">Categories</string>
+
+    <!--Categories activity-->
+    <string name="activity_categories">Categories settings</string>
 
 </resources>
