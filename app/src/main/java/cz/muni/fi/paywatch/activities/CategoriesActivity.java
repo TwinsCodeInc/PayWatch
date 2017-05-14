@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.muni.fi.paywatch.Constants;
@@ -32,9 +34,7 @@ public class CategoriesActivity extends AppCompatActivity {
         cat_type = b.getInt("cat_type");
 
         listView = (ListView) findViewById(R.id.list_view);
-        List<Category> categories = RealmController.with(this).getCategories(cat_type);
-        CategoriesAdapter adapter = new CategoriesAdapter(this, categories);
-        listView.setAdapter(adapter);
+        refreshCategories();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -46,9 +46,22 @@ public class CategoriesActivity extends AppCompatActivity {
                 b.putBoolean("cat_new", false);
                 b.putInt("cat_id", ((Category) listView.getAdapter().getItem(position)).getId());
                 intent.putExtras(b);
-                startActivity(intent);
+                startActivityForResult(intent, Constants.ACTIVITY_RESULT_UPDATED);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == requestCode) {
+            Toast.makeText(this, "activity updated", Toast.LENGTH_SHORT).show();
+            refreshCategories();
+        }
+    }
+
+    private void refreshCategories() {
+        CategoriesAdapter adapter = new CategoriesAdapter(this, RealmController.with(this).getCategories(cat_type));
+        listView.setAdapter(adapter);
     }
 
     @Override

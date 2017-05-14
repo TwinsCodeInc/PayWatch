@@ -79,6 +79,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
                     // Edit existing category
                     RealmController.with(this).updateCategory(catId, name, icon);
                 }
+                setResult(Constants.ACTIVITY_RESULT_UPDATED);
                 finish();
                 return true;
         }

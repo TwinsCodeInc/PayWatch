@@ -14,6 +14,9 @@ public class Constants {
     public static final int F_ADD = 1;
     public static final int F_SETTINGS = 2;
 
+    // Activities
+    public static final  int ACTIVITY_RESULT_UPDATED = 100;
+
     // Sub fragments of ADD section
     public static final int FSUB_EXPENSE = 0;
     public static final int FSUB_INCOME = 1;
