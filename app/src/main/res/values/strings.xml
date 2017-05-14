@@ -72,4 +72,7 @@
     <!--Categories activity-->
     <string name="activity_categories">Categories settings</string>
 
+    <!--Category detail activity-->
+    <string name="activity_category_detail">Category detail</string>
+
 </resources>

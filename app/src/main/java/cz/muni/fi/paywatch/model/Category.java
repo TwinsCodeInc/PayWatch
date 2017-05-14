@@ -12,7 +12,7 @@ public class Category extends RealmObject {
     @PrimaryKey
     private Integer id;
     private String name;
-    private String icon;
+    private Integer iconId;
     private Integer useCount;
     private Integer type;
 
@@ -21,10 +21,10 @@ public class Category extends RealmObject {
         return name;
     }
 
-    public Category(Integer id, String name, String icon, Integer useCount, Integer type) {
+    public Category(Integer id, String name, Integer iconId, Integer useCount, Integer type) {
         this.id = id;
         this.name = name;
-        this.icon = icon;
+        this.iconId = iconId;
         this.useCount = useCount;
         this.type = type;
     }
@@ -49,8 +49,8 @@ public class Category extends RealmObject {
         return name;
     }
 
-    public String getIcon() {
-        return icon;
+    public Integer getIconId() {
+        return iconId;
     }
 
     public Integer getUseCount() {
@@ -65,8 +65,8 @@ public class Category extends RealmObject {
         this.name = name;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIconId(Integer iconId) {
+        this.iconId = iconId;
     }
 
     public void setUseCount(Integer useCount) {

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
+import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.activities.CategoriesActivity;
 import cz.muni.fi.paywatch.activities.MainActivity;
@@ -95,6 +96,19 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mainActivity, CategoriesActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("cat_type", Constants.CAT_TYPE_EXPENSE);
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
+        catIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mainActivity, CategoriesActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("cat_type", Constants.CAT_TYPE_INCOME);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });

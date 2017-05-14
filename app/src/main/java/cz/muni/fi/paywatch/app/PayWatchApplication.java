@@ -34,34 +34,36 @@ public class PayWatchApplication extends Application {
             public void execute(Realm realm) {
                 // Expense categories
                 int i = 0;
-                String expenseCategories[] = {getResources().getString(R.string.init_exp_cat1),
-                                              getResources().getString(R.string.init_exp_cat2),
-                                              getResources().getString(R.string.init_exp_cat3),
-                                              getResources().getString(R.string.init_exp_cat4),
-                                              getResources().getString(R.string.init_exp_cat5),
-                                              getResources().getString(R.string.init_exp_cat6),
-                                              getResources().getString(R.string.init_exp_cat7),
-                                              getResources().getString(R.string.init_exp_cat8),
-                                              getResources().getString(R.string.init_exp_cat9)};
+                int[][] expenseCategories = {{R.string.init_exp_cat1, R.drawable.ic_cat_bills},
+                                             {R.string.init_exp_cat2, R.drawable.ic_cat_food},
+                                             {R.string.init_exp_cat3, R.drawable.ic_cat_entertainment},
+                                             {R.string.init_exp_cat4, R.drawable.ic_cat_travel},
+                                             {R.string.init_exp_cat5, R.drawable.ic_cat_transport},
+                                             {R.string.init_exp_cat6, R.drawable.ic_cat_hobbies},
+                                             {R.string.init_exp_cat7, R.drawable.ic_cat_gifts},
+                                             {R.string.init_exp_cat8, R.drawable.ic_cat_clothing},
+                                             {R.string.init_exp_cat9, R.drawable.ic_cat_other}};
 
-                for (String cName : expenseCategories){
+                for (int[] row : expenseCategories){
                     Category c = realm.createObject(Category.class, i);
-                    c.setName(cName);
+                    c.setName(getResources().getString(row[0]));
                     c.setType(Constants.CAT_TYPE_EXPENSE);
+                    c.setIconId(row[1]);
                     c.setUseCount(0);
                     i += 1;
                 }
 
                 // Income categories
-                String incomeCategories[] = {getResources().getString(R.string.init_inc_cat1),
-                                             getResources().getString(R.string.init_inc_cat2),
-                                             getResources().getString(R.string.init_inc_cat3),
-                                             getResources().getString(R.string.init_inc_cat4),
-                                             getResources().getString(R.string.init_inc_cat5)};
-                for (String cName : incomeCategories){
+                int[][] incomeCategories = {{R.string.init_inc_cat1, R.drawable.ic_cat_extra},
+                                            {R.string.init_inc_cat2, R.drawable.ic_cat_business},
+                                            {R.string.init_inc_cat3, R.drawable.ic_cat_gifts},
+                                            {R.string.init_inc_cat4, R.drawable.ic_cat_salary},
+                                            {R.string.init_inc_cat5, R.drawable.ic_cat_loan}};
+                for (int[] row : incomeCategories){
                     Category c = realm.createObject(Category.class, i);
-                    c.setName(cName);
+                    c.setName(getResources().getString(row[0]));
                     c.setType(Constants.CAT_TYPE_INCOME);
+                    c.setIconId(row[1]);
                     c.setUseCount(0);
                     i += 1;
                 }
