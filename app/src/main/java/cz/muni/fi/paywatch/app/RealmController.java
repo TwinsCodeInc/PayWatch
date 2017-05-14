@@ -66,6 +66,31 @@ public class RealmController {
         }
     }
 
+    // Returns the next value for ID
+    private Integer getCategoryNextId() {
+        return realm.where(Category.class).max("id").intValue() + 1;
+    }
+
+    // Inserts new Category object into database
+    public Integer addCategory(Integer type, String name, String icon) {
+        realm.beginTransaction();
+        Integer id = getCategoryNextId();
+        Category c = new Category(id, name, icon, 0, type);
+        realm.copyToRealm(c);
+        realm.commitTransaction();
+        return id;
+    }
+
+    // Updates category name and icon
+    public void updateCategory(Integer id, String name, String icon) {
+        realm.beginTransaction();
+        Category c = getCategory(id);
+        c.setName(name);
+        c.setIcon(icon);
+        realm.copyToRealm(c);
+        realm.commitTransaction();
+    }
+
     // Returns list of categories
     public List<Category> getCategories(Integer catType) {
         RealmResults<Category> realmResults = realm.where(Category.class).equalTo("type", catType).findAllSorted("useCount", Sort.DESCENDING);
@@ -77,6 +102,11 @@ public class RealmController {
     public String getCategoryName(Integer id) {
         Category c = realm.where(Category.class).equalTo("id", id).findFirst();
         return (c != null) ? c.getName() : "";
+    }
+
+    // Returns category
+    public Category getCategory(Integer catId) {
+        return realm.where(Category.class).equalTo("id", catId).findFirst();
     }
 
     // Inserts new Entry object into database

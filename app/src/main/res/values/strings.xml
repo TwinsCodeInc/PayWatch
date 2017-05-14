@@ -70,9 +70,12 @@
     <string name="sett_cat_title">Categories</string>
 
     <!--Categories activity-->
-    <string name="activity_categories">Categories settings</string>
+    <string name="activity_categories">Categories</string>
+    <string name="add_category">Add category</string>
 
     <!--Category detail activity-->
-    <string name="activity_category_detail">Category detail</string>
+    <string name="activity_category_detail">Category</string>
+    <string name="save_category">Save category</string>
+    <string name="category_name">Category name</string>
 
 </resources>

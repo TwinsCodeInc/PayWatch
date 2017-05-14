@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.model.Category;
 
@@ -35,7 +36,8 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
         TextView textView = (TextView) rowView.findViewById(R.id.label);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         textView.setText(categories.get(position).getName());
-        imageView.setImageResource(categories.get(position).getIconId());
+        imageView.setImageResource(context.getResources().getIdentifier(
+                categories.get(position).getIcon(), "drawable", context.getPackageName()));
         return rowView;
     }
 }
