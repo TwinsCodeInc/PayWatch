@@ -35,11 +35,11 @@ public class IconAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return null;
+        return Constants.CAT_ICONS[position];
     }
 
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     public int getItemPosition(String icon) {

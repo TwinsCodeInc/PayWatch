@@ -17,7 +17,6 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,7 +27,8 @@
         <activity
             android:name=".activities.CategoryDetailActivity"
             android:label="@string/activity_category_detail"
-            android:parentActivityName=".activities.CategoriesActivity" />
+            android:parentActivityName=".activities.CategoriesActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

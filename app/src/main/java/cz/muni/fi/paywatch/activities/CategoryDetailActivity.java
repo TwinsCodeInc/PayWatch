@@ -37,6 +37,9 @@ public class CategoryDetailActivity extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.grid_view);
         editName = (EditText) findViewById(R.id.edit_category_name);
 
+        // Change focus not to show the keyboard immediately
+        editName.clearFocus();
+
         // Prepare icon grid view
         adapter = new IconAdapter(this);
         gridView.setAdapter(adapter);
@@ -67,11 +70,9 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_save_category:
-//                Toast.makeText(this, gridView.getCheckedItemCount(), Toast.LENGTH_SHORT).show();
-
                 String name = editName.getText().toString().trim();
                 if (name.isEmpty()) return false;
-                String icon = Constants.CAT_ICONS[0];
+                String icon = Constants.CAT_ICONS[gridView.getCheckedItemPosition()];
                 if (catNew) {
                     // Add new category
                     RealmController.with(this).addCategory(catType, name, icon);

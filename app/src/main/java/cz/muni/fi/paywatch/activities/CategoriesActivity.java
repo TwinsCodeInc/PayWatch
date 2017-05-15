@@ -54,7 +54,6 @@ public class CategoriesActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == requestCode) {
-            Toast.makeText(this, "activity updated", Toast.LENGTH_SHORT).show();
             refreshCategories();
         }
     }
@@ -83,7 +82,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 b.putInt("cat_type", cat_type);
                 b.putBoolean("cat_new", true);
                 intent.putExtras(b);
-                startActivity(intent);
+                startActivityForResult(intent, Constants.ACTIVITY_RESULT_UPDATED);
         }
         return super.onOptionsItemSelected(item);
     }
