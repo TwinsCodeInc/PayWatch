@@ -199,7 +199,7 @@ public class SettingsFragment extends Fragment {
         builder.show();
     }
 
-    // Shows dialog for a new account name
+    // Shows dialog for account removal confirmation
     public void showAccountRemoveConfirmation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.sett_acc_remove_confirmation);

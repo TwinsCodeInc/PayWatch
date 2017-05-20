@@ -1,6 +1,8 @@
 package cz.muni.fi.paywatch.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +14,9 @@ import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.IconAdapter;
 import cz.muni.fi.paywatch.app.RealmController;
+import cz.muni.fi.paywatch.fragments.SettingsFragment;
 import cz.muni.fi.paywatch.model.Category;
+import io.realm.Realm;
 
 public class CategoryDetailActivity extends AppCompatActivity {
 
@@ -83,7 +87,36 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 setResult(Constants.ACTIVITY_RESULT_UPDATED);
                 finish();
                 return true;
+            case R.id.action_remove_category:
+                showCategoryRemoveConfirmation();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    // Shows dialog for category removal confirmation
+    public void showCategoryRemoveConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.cat_remove_confirmation);
+
+        // Set up the buttons
+        builder.setPositiveButton(R.string.acc_dialog_btn_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                RealmController.with(CategoryDetailActivity.this).reCategorize(catId, catType);
+                RealmController.with(CategoryDetailActivity.this).removeCategory(catId);
+                setResult(Constants.ACTIVITY_RESULT_UPDATED);
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.acc_dialog_btn_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
 }

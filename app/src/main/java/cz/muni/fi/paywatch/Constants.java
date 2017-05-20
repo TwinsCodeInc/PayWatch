@@ -26,7 +26,9 @@ public class Constants {
     public static final int CAT_TYPE_INCOME = 1;
     public static final String EXPENSE_CATEGORIES[] = {"Bills", "Food", "Entertainment", "Travel",
                                                       "Transportation", "Hobbies", "Gifts", "Clothing", "Other"};
-    public static final String INCOME_CATEGORIES[] = {"Extra", "Business", "Gifts", "Salary", "Loan"};
+    public static final String INCOME_CATEGORIES[] = {"Extra", "Business", "Gifts", "Salary", "Loan", "Other"};
+    public static final int CAT_DEF_EXP_OTHER = 8; // ID of "Other" category for expenses
+    public static final int CAT_DEF_INC_OTHER = 14;  // ID of "Other" category for incomes
     public static final String CAT_ICONS[] = {"ic_cat_bills",
                                              "ic_cat_business",
                                              "ic_cat_clothing",
@@ -40,7 +42,9 @@ public class Constants {
                                              "ic_cat_salary",
                                              "ic_cat_travel",
                                              "ic_cat_transport",
-                                             "ic_cat_shopping"};
+                                             "ic_cat_shopping",
+                                             "ic_cat_other"};
+
     // Accounts
     public static final String ACCOUNT1_CURRENCY = "EUR";
     public static final String ACCOUNT2_CURRENCY = "USD";

@@ -72,10 +72,12 @@
     <!--Categories activity-->
     <string name="activity_categories">Categories</string>
     <string name="add_category">Add category</string>
+    <string name="remove_category">Remove category</string>
 
     <!--Category detail activity-->
     <string name="activity_category_detail">Category</string>
     <string name="save_category">Save category</string>
     <string name="category_name">Category name</string>
+    <string name="cat_remove_confirmation">All the data from this category will be recategorized to the "Other" category. Do you want to continue?</string>
 
 </resources>

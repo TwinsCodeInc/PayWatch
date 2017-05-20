@@ -66,6 +66,24 @@ public class RealmController {
         }
     }
 
+    // Change the category for all entries to "other"
+    public void reCategorize(Integer sourceCatId, Integer catType) {
+        int otherCatId = catType == Constants.CAT_TYPE_EXPENSE ? Constants.CAT_DEF_EXP_OTHER : Constants.CAT_DEF_INC_OTHER;
+        realm.beginTransaction();
+        RealmResults<Entry> realmResults = realm.where(Entry.class).equalTo("categoryId", sourceCatId).findAll();
+        List<Entry> items = realm.copyFromRealm(realmResults);
+        for (Entry item : items) {
+            item.setCategoryId(otherCatId);
+        }
+        realm.copyToRealmOrUpdate(items);
+        realm.commitTransaction();
+    }
+
+    // Remove category
+    public void removeCategory(Integer catId) {
+        realm.where(Category.class).equalTo("id", catId).findFirst().deleteFromRealm();
+    }
+
     // Returns the next value for ID
     private Integer getCategoryNextId() {
         return realm.where(Category.class).max("id").intValue() + 1;
