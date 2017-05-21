@@ -58,7 +58,8 @@ public class PayWatchApplication extends Application {
                                                {getResources().getString(R.string.init_inc_cat2), "ic_cat_business"},
                                                {getResources().getString(R.string.init_inc_cat3), "ic_cat_gifts"},
                                                {getResources().getString(R.string.init_inc_cat4), "ic_cat_salary"},
-                                               {getResources().getString(R.string.init_inc_cat5), "ic_cat_loan"}};
+                                               {getResources().getString(R.string.init_inc_cat5), "ic_cat_loan"},
+                                               {getResources().getString(R.string.init_inc_cat6), "ic_cat_other"}};
                 for (String[] row : incomeCategories){
                     Category c = realm.createObject(Category.class, i);
                     c.setName(row[0]);

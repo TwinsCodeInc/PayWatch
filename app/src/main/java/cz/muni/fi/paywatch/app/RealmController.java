@@ -81,7 +81,9 @@ public class RealmController {
 
     // Remove category
     public void removeCategory(Integer catId) {
+        realm.beginTransaction();
         realm.where(Category.class).equalTo("id", catId).findFirst().deleteFromRealm();
+        realm.commitTransaction();
     }
 
     // Returns the next value for ID

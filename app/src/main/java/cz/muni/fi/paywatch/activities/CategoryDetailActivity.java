@@ -13,6 +13,7 @@ import android.widget.Toast;
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.IconAdapter;
+import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.fragments.SettingsFragment;
 import cz.muni.fi.paywatch.model.Category;
@@ -58,6 +59,9 @@ public class CategoryDetailActivity extends AppCompatActivity {
             editName.setText("");
             gridView.setItemChecked(0, true);
         }
+
+        // Do not allow to rename the "Other" category
+        editName.setEnabled(!(catId == Constants.CAT_DEF_EXP_OTHER || catId == Constants.CAT_DEF_INC_OTHER));
     }
 
     @Override
@@ -88,6 +92,12 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_remove_category:
+                // Do not allow to remove "Other" category
+                if (catId == Constants.CAT_DEF_EXP_OTHER || catId == Constants.CAT_DEF_INC_OTHER) {
+                    Helpers.showOkDialog(this, getResources().getString(R.string.dialog_ok_warning_title),
+                            getResources().getString(R.string.dialog_ok_other_category));
+                    return true;
+                }
                 showCategoryRemoveConfirmation();
                 return true;
         }

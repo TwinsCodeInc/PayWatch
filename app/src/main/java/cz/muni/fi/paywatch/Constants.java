@@ -42,8 +42,7 @@ public class Constants {
                                              "ic_cat_salary",
                                              "ic_cat_travel",
                                              "ic_cat_transport",
-                                             "ic_cat_shopping",
-                                             "ic_cat_other"};
+                                             "ic_cat_shopping"};
 
     // Accounts
     public static final String ACCOUNT1_CURRENCY = "EUR";

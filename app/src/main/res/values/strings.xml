@@ -17,6 +17,7 @@
     <string name="init_inc_cat3">Gifts</string>
     <string name="init_inc_cat4">Salary</string>
     <string name="init_inc_cat5">Loan</string>
+    <string name="init_inc_cat6">Other</string>
     <!--Initial account names-->
     <string name="init_acc1">Wallet</string>
     <string name="init_acc2">Bank Account</string>
@@ -79,5 +80,6 @@
     <string name="save_category">Save category</string>
     <string name="category_name">Category name</string>
     <string name="cat_remove_confirmation">All the data from this category will be recategorized to the "Other" category. Do you want to continue?</string>
+    <string name="dialog_ok_other_category">You can not remove the "Other" category.</string>
 
 </resources>
