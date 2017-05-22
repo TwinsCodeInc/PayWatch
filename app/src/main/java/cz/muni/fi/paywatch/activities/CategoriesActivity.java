@@ -59,7 +59,7 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     private void refreshCategories() {
-        CategoriesAdapter adapter = new CategoriesAdapter(this, RealmController.with(this).getCategories(cat_type));
+        CategoriesAdapter adapter = new CategoriesAdapter(this, RealmController.with(this).getCategoriesOrdered(cat_type));
         listView.setAdapter(adapter);
     }
 

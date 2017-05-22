@@ -111,9 +111,16 @@ public class RealmController {
         realm.commitTransaction();
     }
 
-    // Returns list of categories
+    // Returns list of categories ordered by use frequency
     public List<Category> getCategories(Integer catType) {
         RealmResults<Category> realmResults = realm.where(Category.class).equalTo("type", catType).findAllSorted("useCount", Sort.DESCENDING);
+        List<Category> items = realm.copyFromRealm(realmResults);
+        return items;
+    }
+
+    // Returns list of categories ordered by name
+    public List<Category> getCategoriesOrdered(Integer catType) {
+        RealmResults<Category> realmResults = realm.where(Category.class).equalTo("type", catType).findAllSorted("name");
         List<Category> items = realm.copyFromRealm(realmResults);
         return items;
     }
