@@ -27,6 +27,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
     private EditText editName;
     private GridView gridView;
     private IconAdapter adapter;
+    private Menu actionMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,8 @@ public class CategoryDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_category_detail_menu, menu);
+        actionMenu = menu;
+        if (catNew) actionMenu.findItem(R.id.action_remove_category).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

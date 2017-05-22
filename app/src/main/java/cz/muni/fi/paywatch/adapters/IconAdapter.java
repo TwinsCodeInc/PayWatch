@@ -59,7 +59,7 @@ public class IconAdapter extends BaseAdapter {
             imageView = new CheckableImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setPadding(12, 12, 12, 12);
         } else {
             imageView = (CheckableImageView) convertView;
         }
