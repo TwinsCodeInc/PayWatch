@@ -18,7 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sett_acc_title"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@drawable/text_view_sett_label"/>
 
         <GridLayout
             android:layout_width="fill_parent"
@@ -31,37 +33,43 @@
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
-                android:text="@string/sett_acc_name" />
+                android:text="@string/sett_acc_name"
+                android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_name"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:background="@drawable/clickable_label"/>
 
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
-                android:text="@string/sett_acc_currency" />
+                android:text="@string/sett_acc_currency"
+                android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_currency"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:background="@drawable/clickable_label"/>
 
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
-                android:text="@string/sett_acc_color" />
+                android:text="@string/sett_acc_color"
+                android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_color"
-                android:text=""/>
+                android:text=""
+                android:background="@drawable/rounded_edittext"/>
 
             <Button
                 android:layout_columnSpan="2"
@@ -74,19 +82,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sett_cat_title"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@drawable/text_view_sett_label"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="expense cat"
-            android:id="@+id/sett_cat_expense"/>
+            android:text="@string/sett_cat_expense"
+            android:id="@+id/sett_cat_expense"
+            android:background="@drawable/clickable_label"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="income cat"
-            android:id="@+id/sett_cat_income"/>
+            android:text="@string/sett_cat_income"
+            android:id="@+id/sett_cat_income"
+            android:background="@drawable/clickable_label"/>
 
     </LinearLayout>
 
