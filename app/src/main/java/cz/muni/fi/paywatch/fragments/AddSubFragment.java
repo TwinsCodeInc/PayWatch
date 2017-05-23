@@ -2,6 +2,9 @@ package cz.muni.fi.paywatch.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +25,7 @@ import java.util.List;
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.activities.MainActivity;
+import cz.muni.fi.paywatch.adapters.RecyclerCategoryAdapter;
 import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Category;
@@ -33,10 +38,10 @@ public class AddSubFragment extends Fragment {
     private EditText editCurrency;
     private EditText editNote;
     private TextView editDate;
-    private Spinner spinCategory;
     private MainActivity mainActivity;
     private Button btnOk;
     private Button btnOkAndClose;
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,8 +59,18 @@ public class AddSubFragment extends Fragment {
         editCurrency = (EditText) v.findViewById(R.id.edit_currency);
         btnOk = (Button) v.findViewById(R.id.btn_ok);
         btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
-        spinCategory = (Spinner) v.findViewById(R.id.spin_category);
+        //spinCategory = (Spinner) v.findViewById(R.id.spin_category);
         editNote = (EditText) v.findViewById(R.id.edit_note);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_categories);
+
+        // Prepare recyclerview for categories
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        // Horizontal scrolling
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 
         // Clear edit when clicked into and value is 0
         editValue.setOnClickListener(new View.OnClickListener() {
@@ -141,11 +156,13 @@ public class AddSubFragment extends Fragment {
 
     private void refreshCategories() {
         // Load categories
-        int catType = (subFragment == Constants.FSUB_EXPENSE) ? Constants.CAT_TYPE_EXPENSE : Constants.CAT_TYPE_INCOME;
-        List<Category> items = RealmController.with(this).getCategories(catType);
-        ArrayAdapter<Category> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1, items);
-        spinCategory.setAdapter(adapter);
-        spinCategory.setSelection(0);
+        List<Category> categories = RealmController.with(this).getCategories(subFragment);
+        RecyclerCategoryAdapter mAdapter = new RecyclerCategoryAdapter(getActivity(), categories);
+        recyclerView.setAdapter(mAdapter);
+
+        //ArrayAdapter<Category> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1, items);
+        //spinCategory.setAdapter(adapter);
+        //spinCategory.setSelection(0);
     }
 
     private boolean saveEntry() {
@@ -167,8 +184,8 @@ public class AddSubFragment extends Fragment {
             sum *= -1;
         }
         // Get other data
-        Category c = (Category) spinCategory.getSelectedItem();
-        Integer categoryId = (c != null) ? c.getId() : 0;
+        //Category c = (Category) spinCategory.getSelectedItem();
+        Integer categoryId = 0;//(c != null) ? c.getId() : 0;
         Integer accountId = mainActivity.getCurrentAccountId();
         String note = editNote.getText().toString().trim();
 
