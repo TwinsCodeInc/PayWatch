@@ -35,6 +35,8 @@ public class AddSubFragment extends Fragment {
     private TextView editDate;
     private Spinner spinCategory;
     private MainActivity mainActivity;
+    private Button btnOk;
+    private Button btnOkAndClose;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,8 +52,8 @@ public class AddSubFragment extends Fragment {
         editValue = (EditText) v.findViewById(R.id.edit_value);
         editDate = (TextView) v.findViewById(R.id.edit_date);
         editCurrency = (EditText) v.findViewById(R.id.edit_currency);
-        final Button btnOk = (Button) v.findViewById(R.id.btn_ok);
-        final Button btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
+        btnOk = (Button) v.findViewById(R.id.btn_ok);
+        btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
         spinCategory = (Spinner) v.findViewById(R.id.spin_category);
         editNote = (EditText) v.findViewById(R.id.edit_note);
 
@@ -123,7 +125,7 @@ public class AddSubFragment extends Fragment {
         editValue.setSelection(0,editValue.getText().toString().length());
         editNote.setText("");
         // Set default currency
-        refreshCurrency();
+        refreshAccountDetails();
         // Reload categories
         refreshCategories();
         // Set current date
@@ -131,8 +133,10 @@ public class AddSubFragment extends Fragment {
     }
 
     // Refresh the value of currency on ADD section
-    public void refreshCurrency() {
+    public void refreshAccountDetails() {
         editCurrency.setText(RealmController.with(this).getAccountCurrency(mainActivity.getCurrentAccountId()));
+        btnOk.setTextColor(RealmController.with(this).getAccountColor(mainActivity.getCurrentAccountId()));
+        btnOkAndClose.setTextColor(RealmController.with(this).getAccountColor(mainActivity.getCurrentAccountId()));
     }
 
     private void refreshCategories() {

@@ -73,8 +73,12 @@ public class MainActivity extends AppCompatActivity
                     case R.id.action_add:
                         mViewPager.setCurrentItem(Constants.F_ADD);
                         AddFragment fragmentAdd = (AddFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_ADD));
-                        AddSubFragment fragmentAddSub = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getCurrentSubFragmentTag());
-                        fragmentAddSub.refreshControls();
+                        AddSubFragment fragmentAddSubExpense = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_EXPENSE));
+                        AddSubFragment fragmentAddSubIncome = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_INCOME));
+                        // We need to refresh the currency on both fragments
+                        fragmentAddSubExpense.refreshControls();
+                        fragmentAddSubIncome.refreshControls();
+
                         break;
                     case R.id.action_settings:
                         mViewPager.setCurrentItem(Constants.F_SETTINGS);
@@ -154,7 +158,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -174,8 +177,8 @@ public class MainActivity extends AppCompatActivity
             AddSubFragment fragmentAddSubExpense = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_EXPENSE));
             AddSubFragment fragmentAddSubIncome = (AddSubFragment) getSupportFragmentManager().findFragmentByTag(fragmentAdd.getSubFragmentTag(Constants.FSUB_INCOME));
             // We need to refresh the currency on both fragments
-            fragmentAddSubExpense.refreshCurrency();
-            fragmentAddSubIncome.refreshCurrency();
+            fragmentAddSubExpense.refreshControls();
+            fragmentAddSubIncome.refreshControls();
             // Refresh OVERVIEW section
             OverviewFragment fragmentOverview = (OverviewFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_OVERVIEW));
             fragmentOverview.refreshControls();

@@ -6,7 +6,7 @@
             <stroke
                 android:width="3dp"
                 android:color="@color/colorAccent"/>
-            <solid android:drawable="@android:color/transparent"/>
+            <solid android:drawable="@android:color/white"/>
         </shape>
     </item>
 
@@ -15,7 +15,7 @@
             <stroke
                 android:width="3dp"
                 android:color="@color/colorAccent"/>
-            <solid android:drawable="@android:color/transparent"/>
+            <solid android:drawable="@android:color/white"/>
         </shape>
     </item>
 

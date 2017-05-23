@@ -163,7 +163,6 @@ public class RealmController {
 
     // Inserts new Account object into database
     public Integer addAccount(String name) {
-        // TODO: fixnut defaultne hodnoty ake sa pouziju pri vytvoreni accountu
         realm.beginTransaction();
         Integer id = getAccountNextId();
         Account a = new Account(id, name, 0, Constants.DEFAULT_CURRENCY);
@@ -177,10 +176,16 @@ public class RealmController {
         return realm.where(Account.class).equalTo("id", id).findFirst();
     }
 
-    // Returns list of accounts
+    // Returns currency for account
     public String getAccountCurrency(Integer id) {
         Account a = realm.where(Account.class).equalTo("id", id).findFirst();
         return (a != null) ? a.getCurrency() : "";
+    }
+
+    // Returns color for account
+    public Integer getAccountColor(Integer id) {
+        Account a = realm.where(Account.class).equalTo("id", id).findFirst();
+        return (a != null) ? a.getColor() : 0;
     }
 
     // Updates account name
