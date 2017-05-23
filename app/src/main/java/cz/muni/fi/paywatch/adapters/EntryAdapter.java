@@ -13,6 +13,7 @@ import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Entry;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
+import io.realm.RealmResults;
 
 /**
  * Created by Jirka on 14.04.2017.
@@ -23,11 +24,30 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
     TextView txtFirst;
     TextView txtSecond;
     TextView txtThird;
+    TextView txtFourth;
     Activity activity;
+    OrderedRealmCollection<Entry> results;
 
     public EntryAdapter(Activity activity, OrderedRealmCollection<Entry> realmResults) {
         super(realmResults);
+
+        results = realmResults;
         this.activity = activity;
+    }
+
+    @Override
+    public int getCount() {
+        return results.size();
+    }
+
+    @Override
+    public Entry getItem(int position) {
+        return results.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
 
     @Override
@@ -37,20 +57,22 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
 
         if(convertView == null){
 
-            convertView=inflater.inflate(R.layout.list_overview, null);
+            convertView=inflater.inflate(R.layout.overview_item, null);
 
-            txtFirst=(TextView) convertView.findViewById(R.id.date);
-            txtSecond=(TextView) convertView.findViewById(R.id.sum);
-            txtThird=(TextView) convertView.findViewById(R.id.category);
+            txtFirst=(TextView) convertView.findViewById(R.id.item_date);
+            txtSecond=(TextView) convertView.findViewById(R.id.item_note);
+            txtThird=(TextView) convertView.findViewById(R.id.item_category);
+            txtFourth=(TextView) convertView.findViewById(R.id.item_sum);
 
         }
 
 
-        if (adapterData != null) {
-            Entry entry = adapterData.get(position);
+        if (results != null) {
+            Entry entry = results.get(position);
             txtFirst.setText(Helpers.getDateString(entry.getDate()));
-            txtSecond.setText(entry.getSum().toString());
+            txtSecond.setText(entry.getNote());
             txtThird.setText(RealmController.with(activity).getCategoryName(entry.getCategoryId()));
+            txtFourth.setText(entry.getSum().toString());
         }
         return convertView;
     }

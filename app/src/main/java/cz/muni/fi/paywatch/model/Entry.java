@@ -12,8 +12,8 @@ import io.realm.annotations.PrimaryKey;
 
 public class Entry extends RealmObject {
 
-    @PrimaryKey
-    private Integer id;
+    //@PrimaryKey
+    private Float id;
     private Double sum;
     private Integer categoryId;
     private Integer accountId;
@@ -32,9 +32,9 @@ public class Entry extends RealmObject {
         Realm realm = Realm.getDefaultInstance();
         Number nextId = realm.where(Entry.class).max("id");
         if ( nextId == null ) {
-            this.id = 0;
+            this.id = 0f;
         } else {
-            this.id = nextId.intValue() + 1;
+            this.id = nextId.floatValue() + 1f;
         }
         this.note = note;
 

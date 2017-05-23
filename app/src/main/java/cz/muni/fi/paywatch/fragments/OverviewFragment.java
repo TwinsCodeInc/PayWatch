@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.activities.MainActivity;
 import cz.muni.fi.paywatch.adapters.EntryAdapter;
@@ -41,8 +43,14 @@ public class OverviewFragment extends Fragment {
     }
 
     private void refreshEntriesList() {
-        RealmResults<Entry> entries = RealmController.with(this).getEntriesForAccount(mainActivity.getCurrentAccountId());
-        OverviewAdapter adapter = new OverviewAdapter(getActivity(), entries);
+        //RealmResults<Entry> entries = RealmController.with(this).getEntriesForAccount(mainActivity.getCurrentAccountId());
+        ArrayList<String> cards = new ArrayList<>();
+        cards.add("String 1");
+        cards.add("String 2");
+        cards.add("String 3");
+        cards.add("String 4");
+        //cards.add("String 5");
+        OverviewAdapter adapter = new OverviewAdapter(getActivity(), cards);
         entryList.setAdapter(adapter);
     }
 

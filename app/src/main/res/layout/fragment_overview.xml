@@ -6,6 +6,16 @@
     tools:context="cz.muni.fi.paywatch.fragments.OverviewFragment"
     android:id="@+id/fragment_overview">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:clickable="true"
+        android:textIsSelectable="false"
+        android:textSize="30sp"
+        android:focusable="false"
+        android:textAlignment="center"
+        android:text="PayWatch overview"
+        android:id="@+id/overViewTitle"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
