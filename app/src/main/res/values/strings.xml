@@ -30,6 +30,7 @@
     <string name="dialog_ok_incorrect_date">Incorrect date.</string>
     <string name="dialog_ok_incorrect_value">Incorrect value.</string>
     <string name="dialog_ok_select_category">No category selected.</string>
+    <string name="dialog_ok_account_not_selected">Account not selected.</string>
 
     <!--Navigation drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -84,5 +85,13 @@
     <string name="category_name">Category name</string>
     <string name="cat_remove_confirmation">All the data from this category will be recategorized to the "Other" category. Do you want to continue?</string>
     <string name="dialog_ok_other_category">You can not remove the "Other" category.</string>
+
+    <!--Activity transfer-->
+    <string name="transfer_from">From account</string>
+    <string name="transfer_to">To account</string>
+    <string name="transfer_amount">Amount</string>
+    <string name="transfer_btn_transfer">Transfer</string>
+    <string name="note_transfer">Transfer</string>
+    <string name="toast_transfer">Money transfered</string>
 
 </resources>

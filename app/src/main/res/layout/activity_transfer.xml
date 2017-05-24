@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_transfer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="cz.muni.fi.paywatch.activities.TransferActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_transfer_from"
+            android:text="@string/transfer_from"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_acc_from"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_transfer_to"
+            android:text="@string/transfer_to"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_acc_to"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_transfer_amount"
+            android:text="@string/transfer_amount"/>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_transfer_value"
+                android:text="@string/f_add_edit_value_def"
+                android:textSize="28sp"
+                android:gravity="right"
+                android:clickable="true"
+                android:inputType="numberDecimal"
+                android:imeOptions="actionDone"
+                android:focusableInTouchMode="true"/>
+
+            <EditText
+                android:layout_weight="1"
+                android:layout_width="140dp"
+                android:textSize="28sp"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:enabled="false"
+                android:id="@+id/edit_transfer_currency"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_make_transfer"
+            android:text="@string/transfer_btn_transfer"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

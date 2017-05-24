@@ -58,4 +58,8 @@ public class Account extends RealmObject {
         this.currency = currency;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

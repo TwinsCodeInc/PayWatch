@@ -150,6 +150,16 @@ public class RealmController {
         return items;
     }
 
+    // Returns list of accounts without one specific account
+    public List<Account> getAccountsForTransfer(Integer id, String currency) {
+        RealmResults<Account> realmResults = realm.where(Account.class)
+                .notEqualTo("id", id)
+                .equalTo("currency", currency)
+                .findAllSorted("name", Sort.ASCENDING);
+        List<Account> items = realm.copyFromRealm(realmResults);
+        return items;
+    }
+
     // Returns count of accounts
     public int getAccountsCount() {
         RealmResults<Account> realmResults = realm.where(Account.class).findAll();
