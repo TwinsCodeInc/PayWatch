@@ -29,6 +29,7 @@
     <string name="dialog_ok_warning_title">Warning</string>
     <string name="dialog_ok_incorrect_date">Incorrect date.</string>
     <string name="dialog_ok_incorrect_value">Incorrect value.</string>
+    <string name="dialog_ok_select_category">No category selected.</string>
 
     <!--Navigation drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>

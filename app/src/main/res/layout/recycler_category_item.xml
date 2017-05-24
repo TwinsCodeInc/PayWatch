@@ -7,13 +7,14 @@
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
-    <ImageView
+    <cz.muni.fi.paywatch.custom.CheckableImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/category_icon"/>
+        android:id="@+id/category_icon"
+        android:background="@drawable/grid_icon_drawable"/>
 
     <TextView
         android:id="@+id/category_title"

@@ -15,6 +15,7 @@ import cz.muni.fi.paywatch.R;
 public class CheckableImageView extends ImageView implements Checkable {
     private boolean checked = false;
     private static final int[] CHECKED_STATE_SET = { android.R.attr.state_checked };
+    private Integer categoryId;
 
     public CheckableImageView(Context context) {
         super(context);
@@ -50,6 +51,16 @@ public class CheckableImageView extends ImageView implements Checkable {
     @Override
     public void toggle() {
         setChecked(!checked);
+    }
+
+    // Custom metod to set icon name
+    public void setCategoryId(Integer id) {
+        categoryId = id;
+    }
+
+    // Custom metod to get icon name
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
 }

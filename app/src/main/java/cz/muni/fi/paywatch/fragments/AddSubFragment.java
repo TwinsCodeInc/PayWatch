@@ -59,7 +59,6 @@ public class AddSubFragment extends Fragment {
         editCurrency = (EditText) v.findViewById(R.id.edit_currency);
         btnOk = (Button) v.findViewById(R.id.btn_ok);
         btnOkAndClose = (Button) v.findViewById(R.id.btn_ok_close);
-        //spinCategory = (Spinner) v.findViewById(R.id.spin_category);
         editNote = (EditText) v.findViewById(R.id.edit_note);
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_categories);
 
@@ -157,12 +156,8 @@ public class AddSubFragment extends Fragment {
     private void refreshCategories() {
         // Load categories
         List<Category> categories = RealmController.with(this).getCategories(subFragment);
-        RecyclerCategoryAdapter mAdapter = new RecyclerCategoryAdapter(getActivity(), categories);
+        RecyclerCategoryAdapter mAdapter = new RecyclerCategoryAdapter(getActivity(), recyclerView, categories);
         recyclerView.setAdapter(mAdapter);
-
-        //ArrayAdapter<Category> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1, items);
-        //spinCategory.setAdapter(adapter);
-        //spinCategory.setSelection(0);
     }
 
     private boolean saveEntry() {
@@ -183,9 +178,15 @@ public class AddSubFragment extends Fragment {
         if (subFragment == Constants.FSUB_EXPENSE) {
             sum *= -1;
         }
+        // Get selected category
+        Integer categoryId = ((RecyclerCategoryAdapter) recyclerView.getAdapter()).getSelectedCategoryId();
+        if (categoryId == null) {
+            Helpers.showOkDialog(mainActivity, getResources().getString(R.string.dialog_ok_warning_title),
+                    getResources().getString(R.string.dialog_ok_select_category));
+            return false;
+        }
+
         // Get other data
-        //Category c = (Category) spinCategory.getSelectedItem();
-        Integer categoryId = 0;//(c != null) ? c.getId() : 0;
         Integer accountId = mainActivity.getCurrentAccountId();
         String note = editNote.getText().toString().trim();
 
