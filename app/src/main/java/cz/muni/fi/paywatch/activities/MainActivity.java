@@ -1,7 +1,9 @@
 package cz.muni.fi.paywatch.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -138,7 +140,8 @@ public class MainActivity extends AppCompatActivity
         hamburgerMenu.setGroupCheckable(R.id.group_accounts, true, true);
         // If nothing was selected, select the first item
         if (!wasSelected) {
-            MenuItem i = hamburgerMenu.getItem(0);  // first account
+            MenuItem i = hamburgerMenu.findItem(getSettingAccountId());  // first account
+            i = i == null ? hamburgerMenu.getItem(0) : i;
             i.setChecked(true);
             currentAccountId = i.getItemId();
         }
@@ -171,6 +174,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             // Set current account
             currentAccountId = id;
+            // Save account position as last used to te settings
+            setSettingAccountId(id);
             // Refresh SETTINGS section
             SettingsFragment fragmentSettings = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(mSectionsPagerAdapter.getFragmentTag(Constants.F_SETTINGS));
             fragmentSettings.refreshControls();
@@ -237,6 +242,16 @@ public class MainActivity extends AppCompatActivity
         if (hamburgerCurrency != null) {
             hamburgerCurrency.setText(getResources().getString(R.string.hamburger_acc_label_sub) + ": " + RealmController.with(this).getAccountCurrency(getCurrentAccountId()));
         }
+    }
+
+    public Integer getSettingAccountId() {
+        SharedPreferences prefs = this.getSharedPreferences("cz.muni.fi.paywatch", Context.MODE_PRIVATE);
+        return prefs.getInt("lastUsedAccountId", 0);
+    }
+
+    public void setSettingAccountId(Integer id) {
+        SharedPreferences prefs = this.getSharedPreferences("cz.muni.fi.paywatch", Context.MODE_PRIVATE);
+        prefs.edit().putInt("lastUsedAccountId", id).apply();
     }
 
 }

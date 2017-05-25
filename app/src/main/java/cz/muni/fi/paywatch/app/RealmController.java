@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import java.util.List;
 
 import cz.muni.fi.paywatch.Constants;
+import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.model.Account;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
@@ -175,7 +176,7 @@ public class RealmController {
     public Integer addAccount(String name) {
         realm.beginTransaction();
         Integer id = getAccountNextId();
-        Account a = new Account(id, name, 0, Constants.DEFAULT_CURRENCY);
+        Account a = new Account(id, name, R.color.materialcolorpicker__black, Constants.DEFAULT_CURRENCY);
         realm.copyToRealm(a);
         realm.commitTransaction();
         return id;
