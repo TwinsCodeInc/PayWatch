@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.activities.CategoriesActivity;
 import cz.muni.fi.paywatch.activities.MainActivity;
+import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.model.Account;
 
@@ -34,6 +36,7 @@ public class SettingsFragment extends Fragment {
     private Button accRemoveBtn;
     private TextView catExpense;
     private TextView catIncome;
+    private TextView accBudgetView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class SettingsFragment extends Fragment {
 
         accNameView = (TextView) v.findViewById(R.id.acc_name);
         accCurrencyView = (TextView) v.findViewById(R.id.acc_currency);
+        accBudgetView = (TextView) v.findViewById(R.id.acc_budget);
         accRemoveBtn = (Button) v.findViewById(R.id.acc_remove_btn);
         accColor = (TextView) v.findViewById(R.id.acc_color);
         catExpense = (TextView) v.findViewById(R.id.sett_cat_expense);
@@ -53,13 +57,19 @@ public class SettingsFragment extends Fragment {
         accNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddAccountDialogName();
+                showAccountDialogName();
             }
         });
         accCurrencyView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddAccountDialogCurency();
+                showAccountDialogCurency();
+            }
+        });
+        accBudgetView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAccountDialogBudget();
             }
         });
         accRemoveBtn.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +139,7 @@ public class SettingsFragment extends Fragment {
         accNameView.setText(a.getName());
         accCurrencyView.setText(a.getCurrency());
         accColor.setBackgroundColor(a.getColor());
+        accBudgetView.setText(a.getBudget().toString());
     }
 
     public static SettingsFragment newInstance() {
@@ -137,7 +148,7 @@ public class SettingsFragment extends Fragment {
     }
 
     // Shows dialog for a new account name
-    public void showAddAccountDialogName() {
+    public void showAccountDialogName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.acc_dialog_title);
 
@@ -169,7 +180,7 @@ public class SettingsFragment extends Fragment {
     }
 
     // Shows dialog for a account currency
-    public void showAddAccountDialogCurency() {
+    public void showAccountDialogCurency() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.acc_currency_dialog_title);
 
@@ -182,7 +193,7 @@ public class SettingsFragment extends Fragment {
         builder.setPositiveButton(R.string.acc_dialog_btn_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String currency = input.getText().toString().trim();
+                String currency = input.getText().toString().trim().toUpperCase();
                 if (!currency.isEmpty()) {
                     RealmController.with(SettingsFragment.this).updateAccountCurrency(mainActivity.getCurrentAccountId(), currency);
                     refreshAccount();
@@ -211,6 +222,42 @@ public class SettingsFragment extends Fragment {
                 RealmController.with(SettingsFragment.this).removeAccount(mainActivity.getCurrentAccountId());
                 mainActivity.refreshAccounts();
                 refreshAccount();
+            }
+        });
+        builder.setNegativeButton(R.string.acc_dialog_btn_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    // Shows dialog for a budget value
+    public void showAccountDialogBudget() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.acc_budget_dialog_title);
+
+        // Set up the input
+        final EditText input = new EditText(getActivity());
+        input.setText(accBudgetView.getText());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton(R.string.acc_dialog_btn_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Double budget = Helpers.parseDouble(input.getText().toString().trim());
+                if (budget == null) {
+                    Helpers.showOkDialog(mainActivity, getResources().getString(R.string.dialog_ok_warning_title),
+                            getResources().getString(R.string.dialog_ok_incorrect_value));
+                } else {
+                    RealmController.with(SettingsFragment.this).updateAccountBudget(mainActivity.getCurrentAccountId(), budget);
+                    refreshAccount();
+                    mainActivity.refreshAccounts();
+                }
             }
         });
         builder.setNegativeButton(R.string.acc_dialog_btn_cancel, new DialogInterface.OnClickListener() {

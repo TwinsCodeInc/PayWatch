@@ -176,7 +176,7 @@ public class RealmController {
     public Integer addAccount(String name) {
         realm.beginTransaction();
         Integer id = getAccountNextId();
-        Account a = new Account(id, name, R.color.materialcolorpicker__black, Constants.DEFAULT_CURRENCY);
+        Account a = new Account(id, name, R.color.materialcolorpicker__black, Constants.DEFAULT_CURRENCY, 0.0);  // default budget 0
         realm.copyToRealm(a);
         realm.commitTransaction();
         return id;
@@ -204,6 +204,15 @@ public class RealmController {
         realm.beginTransaction();
         Account a = getAccount(id);
         a.setName(name);
+        realm.copyToRealm(a);
+        realm.commitTransaction();
+    }
+
+    // Updates account budget
+    public void updateAccountBudget(Integer id, Double budget) {
+        realm.beginTransaction();
+        Account a = getAccount(id);
+        a.setBudget(budget);
         realm.copyToRealm(a);
         realm.commitTransaction();
     }

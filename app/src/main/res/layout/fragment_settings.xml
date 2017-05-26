@@ -61,6 +61,20 @@
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
+                android:text="@string/sett_acc_budget"
+                android:background="@drawable/text_view_sett_sublabel"/>
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill_horizontal"
+                android:id="@+id/acc_budget"
+                android:clickable="true"
+                android:background="@drawable/clickable_label"/>
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_rowSpan="1"
                 android:text="@string/sett_acc_color"
                 android:background="@drawable/text_view_sett_sublabel"/>
 

@@ -14,12 +14,15 @@ public class Account extends RealmObject {
     private String name;
     private Integer color;
     private String currency;
+    private Double budget;
 
-    public Account(Integer id, String name, Integer color, String currency) {
+
+    public Account(Integer id, String name, Integer color, String currency, Double budget) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.currency = currency;
+        this.budget = budget;
     }
 
     public Account() {
@@ -61,5 +64,13 @@ public class Account extends RealmObject {
     @Override
     public String toString() {
         return name;
+    }
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
     }
 }

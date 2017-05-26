@@ -74,10 +74,12 @@ public class PayWatchApplication extends Application {
                 a.setName(getResources().getString(R.string.init_acc1));
                 a.setCurrency(Constants.ACCOUNT1_CURRENCY);
                 a.setColor(ContextCompat.getColor(mContext, R.color.light_blue));
+                a.setBudget(0.0);
                 Account b = realm.createObject(Account.class, 1);
                 b.setName(getResources().getString(R.string.init_acc2));
                 b.setCurrency(Constants.ACCOUNT2_CURRENCY);
                 b.setColor(ContextCompat.getColor(mContext, R.color.materialcolorpicker__black));
+                b.setBudget(0.0);
 
             }
         }).name(Realm.DEFAULT_REALM_NAME)
