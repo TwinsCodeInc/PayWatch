@@ -56,7 +56,7 @@ public class Constants {
 
     // Accounts
     public static final String ACCOUNT1_CURRENCY = "EUR";
-    public static final String ACCOUNT2_CURRENCY = "USD";
+    public static final String ACCOUNT2_CURRENCY = "EUR";
     public static final String DEFAULT_CURRENCY = "EUR";
     public static final int ITEM_ADD_ACCOUNT = 1001;
     public static final int ITEM_TRANSFER = 1002;

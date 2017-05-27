@@ -199,6 +199,11 @@ public class RealmController {
         return (a != null) ? a.getColor() : 0;
     }
 
+    // Returns account's overall balance
+    public Double getAccountBalance(Integer accountId) {
+        return realm.where(Entry.class).equalTo("accountId", accountId).sum("sum").doubleValue();
+    }
+
     // Updates account name
     public void updateAccountName(Integer id, String name) {
         realm.beginTransaction();

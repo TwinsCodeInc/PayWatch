@@ -194,6 +194,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String currency = input.getText().toString().trim().toUpperCase();
+                currency = currency.length() > 3 ? currency.substring(0, 3) : currency;
                 if (!currency.isEmpty()) {
                     RealmController.with(SettingsFragment.this).updateAccountCurrency(mainActivity.getCurrentAccountId(), currency);
                     refreshAccount();

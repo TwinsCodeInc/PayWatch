@@ -54,7 +54,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Accounts-->
-    <string name="hamburger_acc_label_main">Account balance: XXX</string>
+    <string name="hamburger_acc_label_main">Account balance</string>
     <string name="hamburger_acc_label_sub">Currency</string>
     <string name="acc_dialog_title">Account name</string>
     <string name="acc_currency_dialog_title">Currency</string>

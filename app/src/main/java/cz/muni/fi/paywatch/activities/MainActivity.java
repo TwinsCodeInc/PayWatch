@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity
                 // Hide keyboard
                 Helpers.hideSoftKeyboard(MainActivity.this);
                 // Refresh header labels
-                refreshHamburgerCurrencyLabel();
+                refreshHamburgerAccountLabel();
             }
         };
         drawer.setDrawerListener(toggle);
@@ -237,10 +237,15 @@ public class MainActivity extends AppCompatActivity
         return mViewPager.getCurrentItem();
     }
 
-    public void refreshHamburgerCurrencyLabel() {
+    public void refreshHamburgerAccountLabel() {
         TextView hamburgerCurrency = (TextView) findViewById(R.id.hamburger_currency_label);
         if (hamburgerCurrency != null) {
             hamburgerCurrency.setText(getResources().getString(R.string.hamburger_acc_label_sub) + ": " + RealmController.with(this).getAccountCurrency(getCurrentAccountId()));
+        }
+        TextView hamburgerBalance = (TextView) findViewById(R.id.hamburger_account_balance_label);
+        if (hamburgerBalance != null) {
+            hamburgerBalance.setText(getResources().getString(R.string.hamburger_acc_label_main) + ": " +
+                    RealmController.with(this).getAccountBalance(getCurrentAccountId()).toString());
         }
     }
 
