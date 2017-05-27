@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sett_acc_title"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:background="@drawable/text_view_sett_label"/>
 
         <GridLayout
@@ -34,6 +34,7 @@
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_name"
+                android:gravity="center_vertical"
                 android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
@@ -41,6 +42,7 @@
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_name"
                 android:clickable="true"
+                android:textSize="18dp"
                 android:background="@drawable/clickable_label"/>
 
             <TextView
@@ -48,6 +50,7 @@
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_currency"
+                android:gravity="center_vertical"
                 android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
@@ -55,6 +58,7 @@
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_currency"
                 android:clickable="true"
+                android:textSize="18dp"
                 android:background="@drawable/clickable_label"/>
 
             <TextView
@@ -62,6 +66,7 @@
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_budget"
+                android:gravity="center_vertical"
                 android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
@@ -69,6 +74,7 @@
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_budget"
                 android:clickable="true"
+                android:textSize="18dp"
                 android:background="@drawable/clickable_label"/>
 
             <TextView
@@ -76,6 +82,7 @@
                 android:layout_gravity="fill"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_color"
+                android:gravity="center_vertical"
                 android:background="@drawable/text_view_sett_sublabel"/>
 
             <TextView
@@ -83,6 +90,7 @@
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_color"
                 android:text=""
+                android:textSize="18dp"
                 android:background="@drawable/rounded_edittext"/>
 
             <Button
@@ -97,7 +105,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sett_cat_title"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:background="@drawable/text_view_sett_label"/>
 
         <TextView
@@ -105,6 +113,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sett_cat_expense"
             android:id="@+id/sett_cat_expense"
+            android:textSize="18dp"
             android:background="@drawable/clickable_label"/>
 
         <TextView
@@ -112,6 +121,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sett_cat_income"
             android:id="@+id/sett_cat_income"
+            android:textSize="18dp"
             android:background="@drawable/clickable_label"/>
 
     </LinearLayout>

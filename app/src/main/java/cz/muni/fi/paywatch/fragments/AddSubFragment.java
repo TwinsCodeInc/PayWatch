@@ -136,14 +136,13 @@ public class AddSubFragment extends Fragment {
     public void refreshControls() {
         // Set default value
         editValue.setText(getResources().getString(R.string.f_add_edit_value_def));
-        editValue.setSelection(0, editValue.getText().toString().length());
         editNote.setText("");
         // Set default currency
         refreshAccountDetails();
         // Reload categories
         refreshCategories();
         // Set current date
-        editDate.setText(Helpers.getActualDateString());
+        editDate.setText(getResources().getString(R.string.f_add_date_today));
     }
 
     // Refresh the value of currency on ADD section
@@ -162,11 +161,17 @@ public class AddSubFragment extends Fragment {
 
     private boolean saveEntry() {
         // Parse date
-        Date date = Helpers.stringToDate(editDate.getText().toString());
-        if (date == null) {
-            Helpers.showOkDialog(mainActivity, getResources().getString(R.string.dialog_ok_warning_title),
-                    getResources().getString(R.string.dialog_ok_incorrect_date));
-            return false; // unable to parse date from string
+        Date date;
+        String dateString = editDate.getText().toString();
+        if (dateString.equals(getResources().getString(R.string.f_add_date_today))) {
+            date = Calendar.getInstance().getTime();
+        } else {
+            date = Helpers.stringToDate(dateString);
+            if (date == null) {
+                Helpers.showOkDialog(mainActivity, getResources().getString(R.string.dialog_ok_warning_title),
+                        getResources().getString(R.string.dialog_ok_incorrect_date));
+                return false; // unable to parse date from string
+            }
         }
         // Parse sum
         Double sum = Helpers.parseDouble(editValue.getText().toString());

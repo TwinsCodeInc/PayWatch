@@ -16,12 +16,14 @@
         android:layout_height="wrap_content"
         android:text="@string/hamburger_acc_label_main"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:id="@+id/hamburger_account_balance_label"/>
+        android:id="@+id/hamburger_account_balance_label"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/hamburger_currency_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hamburger_acc_label_sub" />
+        android:text="@string/hamburger_acc_label_sub"
+        android:textSize="18sp"/>
 
 </LinearLayout>

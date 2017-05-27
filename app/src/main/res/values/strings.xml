@@ -49,9 +49,7 @@
     <string name="f_add_edit_value_def">0.00</string>
     <string name="f_add_toast_entry_added">Entry added</string>
     <string name="f_add_note">Optional note</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="f_add_date_today">Today</string>
 
     <!--Accounts-->
     <string name="hamburger_acc_label_main">Account balance</string>

@@ -4,6 +4,7 @@ package cz.muni.fi.paywatch.adapters;
  * Created by Daniel on 23. 5. 2017.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.app.Helpers;
 import cz.muni.fi.paywatch.custom.CheckableImageView;
 import cz.muni.fi.paywatch.model.Category;
 
@@ -25,31 +27,41 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
     private final Context context;
     private final RecyclerView recyclerView;
     private Integer selectedPos;
+    private View.OnClickListener myOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Helpers.hideSoftKeyboard((Activity)RecyclerCategoryAdapter.this.context);
+            CheckableImageView icon = (CheckableImageView) v.findViewById(R.id.category_icon);
+            icon.performClick();
+        }
+    };
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public CheckableImageView icon;
+        private View.OnClickListener iconClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Helpers.hideSoftKeyboard((Activity)RecyclerCategoryAdapter.this.context);
+                // Deselect previous choice
+                if (selectedPos != null) {
+                    MyViewHolder vh = (MyViewHolder) recyclerView.findViewHolderForAdapterPosition(selectedPos);
+                    if (vh != null) {
+                        vh.icon.setChecked(false);
+                    }
+                }
+                // Select new choice
+                icon.setChecked(true);
+                selectedPos = getAdapterPosition();
+            }
+        };
 
         public MyViewHolder(View view) {
             super(view);
             icon = (CheckableImageView) view.findViewById(R.id.category_icon);
             icon.setChecked(false);
             title = (TextView) view.findViewById(R.id.category_title);
-            icon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Deselect previous choice
-                    if (selectedPos != null) {
-                        MyViewHolder vh = (MyViewHolder) recyclerView.findViewHolderForAdapterPosition(selectedPos);
-                        if (vh != null) {
-                            vh.icon.setChecked(false);
-                        }
-                    }
-                    // Select new choice
-                    icon.setChecked(true);
-                    selectedPos = getAdapterPosition();
-                }
-            });
+            icon.setOnClickListener(iconClickListener);
         }
     }
 
@@ -63,7 +75,7 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_category_item, parent, false);
-
+        itemView.setOnClickListener(myOnClickListener);
         return new MyViewHolder(itemView);
     }
 
