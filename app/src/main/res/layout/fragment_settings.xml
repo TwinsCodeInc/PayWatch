@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:columnCount="2"
             android:orientation="horizontal"
-            android:rowCount="3">
+            android:rowCount="4">
 
             <TextView
                 android:layout_columnSpan="1"
@@ -90,8 +90,7 @@
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_color"
                 android:text=""
-                android:textSize="18dp"
-                android:background="@drawable/rounded_edittext"/>
+                android:textSize="18dp"/>
 
             <Button
                 android:layout_columnSpan="2"

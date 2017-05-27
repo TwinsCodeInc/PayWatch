@@ -53,7 +53,7 @@ public class CategoriesActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == requestCode) {
+        if (requestCode == Constants.ACTIVITY_RESULT_UPDATED && resultCode == RESULT_OK) {
             refreshCategories();
         }
     }

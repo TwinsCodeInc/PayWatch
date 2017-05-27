@@ -91,7 +91,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
                     // Edit existing category
                     RealmController.with(this).updateCategory(catId, name, icon);
                 }
-                setResult(Constants.ACTIVITY_RESULT_UPDATED);
+                setResult(RESULT_OK);
                 finish();
                 return true;
             case R.id.action_remove_category:
@@ -118,7 +118,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 RealmController.with(CategoryDetailActivity.this).reCategorize(catId, catType);
                 RealmController.with(CategoryDetailActivity.this).removeCategory(catId);
-                setResult(Constants.ACTIVITY_RESULT_UPDATED);
+                setResult(RESULT_OK);
                 finish();
             }
         });
