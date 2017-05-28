@@ -32,6 +32,7 @@
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
+                android:paddingLeft="5dp"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_name"
                 android:gravity="center_vertical"
@@ -40,6 +41,7 @@
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill_horizontal"
+                android:layout_marginRight="4dp"
                 android:id="@+id/acc_name"
                 android:clickable="true"
                 android:textSize="18dp"
@@ -48,6 +50,7 @@
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
+                android:paddingLeft="5dp"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_currency"
                 android:gravity="center_vertical"
@@ -64,6 +67,7 @@
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
+                android:paddingLeft="5dp"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_budget"
                 android:gravity="center_vertical"
@@ -80,6 +84,7 @@
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
+                android:paddingLeft="5dp"
                 android:layout_rowSpan="1"
                 android:text="@string/sett_acc_color"
                 android:gravity="center_vertical"
@@ -88,6 +93,7 @@
             <TextView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill_horizontal"
+                android:layout_marginRight="4dp"
                 android:id="@+id/acc_color"
                 android:text=""
                 android:textSize="18dp"/>
@@ -96,7 +102,9 @@
                 android:layout_columnSpan="2"
                 android:layout_gravity="fill_horizontal"
                 android:id="@+id/acc_remove_btn"
-                android:text="@string/sett_acc_remove_btn"/>
+                android:text="@string/sett_acc_remove_btn"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"/>
         </GridLayout>
 
         <TextView
@@ -110,6 +118,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="@string/sett_cat_expense"
             android:id="@+id/sett_cat_expense"
             android:textSize="18dp"
@@ -118,6 +127,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="@string/sett_cat_income"
             android:id="@+id/sett_cat_income"
             android:textSize="18dp"
