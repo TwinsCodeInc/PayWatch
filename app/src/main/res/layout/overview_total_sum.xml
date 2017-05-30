@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Actual Bilance"
+            android:text="Actual Balance"
             android:id="@+id/categoryRatioTitle"/>
 
         <TextView
@@ -40,7 +40,7 @@
             android:textIsSelectable="false"
             android:textSize="15sp"
             android:focusable="false"
-            android:text="Predicted bilance"
+            android:text="Predicted balance"
             android:textAlignment="center"
             android:id="@+id/totalSumPredictionTitle"/>
 
