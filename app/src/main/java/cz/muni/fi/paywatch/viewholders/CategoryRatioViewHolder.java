@@ -77,6 +77,7 @@ public class CategoryRatioViewHolder extends RecyclerView.ViewHolder {
 
 
         PieDataSet dataSet = new PieDataSet(entries, null); // add entries to dataset
+        dataSet.setColors(new int[] {R.color.blue, R.color.red, R.color.green, R.color.yellow, R.color.brown, R.color.indigo, R.color.orange, R.color.indigo});
         PieData data = new PieData(dataSet);
         chart.setData(data);
         chart.setDrawSliceText(false);
