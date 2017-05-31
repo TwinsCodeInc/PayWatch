@@ -53,7 +53,7 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
 
         try {
             startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-31");
+            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-30");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -69,7 +69,7 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
         boolean firstPrediction = true;
         for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
             if ( date.after( new Date() ) ) {
-                if ( firstPrediction ) {
+                if ( firstPrediction && index > 0 ) {
                     prediction.add(new com.github.mikephil.charting.data.Entry(index-1, initValue + lastBalance));
                     firstPrediction = false;
                 }
