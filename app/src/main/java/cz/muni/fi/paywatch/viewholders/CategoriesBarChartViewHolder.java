@@ -42,6 +42,7 @@ import io.realm.RealmResults;
 
 public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
 
+    OverviewAdapter mAdapter;
     BarChart chart;
     float dailyExpensePrediction;
     Realm realm;
@@ -51,6 +52,7 @@ public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
     public CategoriesBarChartViewHolder(View itemView, OverviewAdapter mAdapter) {
         super(itemView);
 
+        this.mAdapter = mAdapter;
         chart = (BarChart) itemView.findViewById(R.id.categoriesBarChart);
 
         realm = Realm.getDefaultInstance();
@@ -58,18 +60,16 @@ public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
         List<com.github.mikephil.charting.data.BarEntry> entries = new ArrayList<>();
         List<com.github.mikephil.charting.data.BarEntry> prediction = new ArrayList<>();
 
-        try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-31");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-         for (Category category : RealmController.with((Activity)itemView.getContext()).getCategories(Constants.CAT_TYPE_EXPENSE) ) {
+        startDate = mAdapter.activity.getCurrentMonthStart();
+        endDate = mAdapter.activity.getCurrentMonthEnd();
+
+        for (Category category : RealmController.with((Activity)itemView.getContext()).getCategories(Constants.CAT_TYPE_EXPENSE) ) {
              float sum = realm.where(Entry.class)
                      .equalTo("categoryId", category.getId())
                      .greaterThanOrEqualTo("date", startDate)
                      .lessThanOrEqualTo("date", endDate)
+                     .equalTo("accountId", mAdapter.activity.getCurrentAccountId())
                      .sum("sum").floatValue() * (-1);
 
              entries.add(new com.github.mikephil.charting.data.BarEntry(category.getId().floatValue(), sum));
@@ -96,17 +96,17 @@ public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
 
         float sum = realm.where(Entry.class)
                 .equalTo("categoryId", categoryId )
-                .equalTo("accountId", 0)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId())
                 .sum("sum").floatValue() * (-1);
 
         if ( sum == 0.0f ) {
             return 0.0f;
         }
         Date firstDate = realm.where(Entry.class)
-                .equalTo("accountId", 0)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
                 .minimumDate("date");
         Date lastDate = realm.where(Entry.class)
-                .equalTo("accountId", 0)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
                 .maximumDate("date");
 
         float daysDiff = ( lastDate.getTime() - firstDate.getTime() ) / ( 24 * 60 * 60 * 1000 ) + 1;

@@ -43,25 +43,25 @@ import io.realm.RealmResults;
 
 public class TotalSumViewHolder extends RecyclerView.ViewHolder {
 
+    OverviewAdapter mAdapter;
     Realm realm;
     Date startDate = null;
     Date endDate = null;
 
     public TotalSumViewHolder(View itemView, OverviewAdapter mAdapter) {
         super(itemView);
-        mAdapter.activity.getCurrentAccountId();
+
+        this.mAdapter = mAdapter;
+
+        startDate = mAdapter.activity.getCurrentMonthStart();
+        endDate = mAdapter.activity.getCurrentMonthEnd();
         realm = Realm.getDefaultInstance();
-        try {
-            startDate = mAdapter.activity.getCurrentMonth();
-            //startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-30");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         TextView totalSumView = (TextView) itemView.findViewById(R.id.totalSum);
         TextView totalSumPredictionView = (TextView) itemView.findViewById(R.id.totalSumPrediction);
-        float totalSum = realm.where(Entry.class).sum("sum").floatValue();
+        float totalSum = realm.where(Entry.class)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
+                .sum("sum").floatValue();
         totalSumView.setText(Float.toString(totalSum));
         totalSumPredictionView.setText(Float.toString(totalSum + getDailyExpensePrediction() ));
     }
@@ -70,7 +70,7 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
 
         float sum = realm.where(Entry.class)
                 .lessThan("sum", 0.0d)
-                .equalTo("accountId", 0)
+                .equalTo("accountId", this.mAdapter.activity.getCurrentAccountId() )
                 .greaterThanOrEqualTo("date", startDate)
                 .lessThanOrEqualTo("date", endDate)
                 .sum("sum").floatValue();

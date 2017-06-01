@@ -54,7 +54,11 @@ public class LastItemsViewHolder extends RecyclerView.ViewHolder {
 
         Realm realm = Realm.getDefaultInstance();
 
-        OrderedRealmCollection<Entry> results = realm.where(Entry.class).findAllSorted("date", Sort.DESCENDING);
+        OrderedRealmCollection<Entry> results = realm.where(Entry.class)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId())
+                .greaterThanOrEqualTo("date", mAdapter.activity.getCurrentMonthStart())
+                .lessThanOrEqualTo("date", mAdapter.activity.getCurrentMonthEnd())
+                .findAllSorted("date", Sort.DESCENDING);
 
         EntryAdapter adapter = new EntryAdapter((Activity)itemView.getContext(), results);
         listView.setAdapter(adapter);

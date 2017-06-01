@@ -53,14 +53,9 @@ public class CategoryRatioViewHolder extends RecyclerView.ViewHolder {
 
         List<com.github.mikephil.charting.data.PieEntry> entries = new ArrayList<>();
 
-        Date startDate = null;
-        Date endDate = null;
-        try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-31");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date startDate = mAdapter.activity.getCurrentMonthStart();
+        Date endDate = mAdapter.activity.getCurrentMonthEnd();
+
         RealmResults<Category> categories = realm.where(Category.class).equalTo("type", Constants.CAT_TYPE_EXPENSE).findAll();
 
         for ( Category category : categories ) {
@@ -68,6 +63,7 @@ public class CategoryRatioViewHolder extends RecyclerView.ViewHolder {
             float categorySum = realm.where(Entry.class)
                     .greaterThanOrEqualTo("date", startDate)
                     .lessThanOrEqualTo("date", endDate)
+                    .equalTo("accountId", mAdapter.activity.getCurrentAccountId())
                     .equalTo("categoryId", category.getId())
                     .sum("sum").floatValue();
             if ( categorySum != 0 ) {

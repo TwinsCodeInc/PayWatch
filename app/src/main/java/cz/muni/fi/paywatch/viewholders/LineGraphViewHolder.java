@@ -51,18 +51,18 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
         List<com.github.mikephil.charting.data.Entry> entries = new ArrayList<>();
         List<com.github.mikephil.charting.data.Entry> prediction = new ArrayList<>();
 
-        try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-30");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        startDate = mAdapter.activity.getCurrentMonthStart();
+        endDate = mAdapter.activity.getCurrentMonthEnd();
+
         Calendar start = Calendar.getInstance();
         start.setTime(startDate);
         Calendar end = Calendar.getInstance();
         end.setTime(endDate);
 
-        float initValue = realm.where(Entry.class).lessThan("date",startDate).sum("sum").floatValue();
+        float initValue = realm.where(Entry.class)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
+                .lessThan("date",startDate)
+                .sum("sum").floatValue();
 
         int index = 0;
         float lastBalance = 0f;
@@ -77,6 +77,7 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
                 prediction.add(new com.github.mikephil.charting.data.Entry(index++, initValue + lastBalance));
             } else {
                 lastBalance = realm.where(Entry.class)
+                        .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
                         .greaterThanOrEqualTo("date", startDate)
                         .lessThanOrEqualTo("date", date)
                         .sum("sum").floatValue();
@@ -94,10 +95,10 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
 
 
         LineData data = new LineData(dataSet, dataSet2);
-        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+       /* chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.setData(data);
         chart.getDescription().setEnabled(false);
-        chart.invalidate(); // refresh
+        chart.invalidate(); // refresh*/
 
     }
 

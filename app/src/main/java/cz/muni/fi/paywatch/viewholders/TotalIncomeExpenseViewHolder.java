@@ -51,24 +51,20 @@ public class TotalIncomeExpenseViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         realm = Realm.getDefaultInstance();
-        try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-31");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        startDate = mAdapter.activity.getCurrentMonthStart();
+        endDate = mAdapter.activity.getCurrentMonthEnd();
 
         TextView totalExpenseSumView = (TextView) itemView.findViewById(R.id.totalExpenseSum);
         TextView totalIncomeSumPredictionView = (TextView) itemView.findViewById(R.id.totalIncomeSum);
         TextView totalDifferenceView = (TextView) itemView.findViewById(R.id.totalDifferenceSum);
         float totalIncomeSum = realm.where(Entry.class)
-                .equalTo("accountId", 0)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
                 .greaterThanOrEqualTo("date",startDate)
                 .lessThanOrEqualTo("date", endDate)
                 .greaterThan("sum",0.0d)
                 .sum("sum").floatValue();
         float totalExpenseSum = realm.where(Entry.class)
-                .equalTo("accountId", 0)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
                 .greaterThanOrEqualTo("date",startDate)
                 .lessThanOrEqualTo("date", endDate)
                 .lessThan("sum",0.0d)

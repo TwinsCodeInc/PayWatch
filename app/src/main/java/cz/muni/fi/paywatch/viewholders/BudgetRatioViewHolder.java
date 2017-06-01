@@ -53,21 +53,18 @@ public class BudgetRatioViewHolder extends RecyclerView.ViewHolder {
 
         List<com.github.mikephil.charting.data.PieEntry> entries = new ArrayList<>();
 
-        Date startDate = null;
-        Date endDate = null;
-        try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-30");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date startDate = mAdapter.activity.getCurrentMonthStart();
+        Date endDate = mAdapter.activity.getCurrentMonthEnd();
         float totalSum = realm.where(Entry.class)
+                .equalTo("accountId", mAdapter.activity.getCurrentAccountId())
                 .lessThan("sum", 0.0d)
                 .greaterThanOrEqualTo("date", startDate)
                 .lessThanOrEqualTo("date", endDate)
                 .sum("sum").floatValue() * (-1);
 
-        float rest = Math.max(RealmController.getInstance().getAccount(1).getBudget().floatValue() - totalSum, 0);
+        float rest = Math.max(RealmController.getInstance()
+                .getAccount(mAdapter.activity.getCurrentAccountId())
+                .getBudget().floatValue() - totalSum, 0);
 
         entries.add(new com.github.mikephil.charting.data.PieEntry(totalSum, "Spent"));
         entries.add(new com.github.mikephil.charting.data.PieEntry(rest, "Rest"));

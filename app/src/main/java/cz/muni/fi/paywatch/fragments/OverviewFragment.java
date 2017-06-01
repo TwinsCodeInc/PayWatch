@@ -50,8 +50,7 @@ public class OverviewFragment extends Fragment {
 
         monthTitle = (TextView) v.findViewById(R.id.month_title);
         Calendar cal = Calendar.getInstance();
-        cal.setTime(mainActivity.getCurrentMonth());
-
+        cal.setTime(mainActivity.getCurrentMonthStart());
         monthTitle.setText( new DateFormatSymbols().getMonths()[cal.get(Calendar.MONTH) - 1] + " " + String.valueOf(cal.get(Calendar.YEAR)) );
 
         monthTitle.setOnClickListener(new View.OnClickListener(){

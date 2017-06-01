@@ -235,13 +235,24 @@ public class MainActivity extends AppCompatActivity
         return currentAccountId;
     }
 
-    public Date getCurrentMonth() {
+    public Date getCurrentMonthStart() {
         if ( currentMonth == null ) {
-            Calendar defDate = Calendar.getInstance();
-            defDate.set(Calendar.DATE, 1);
-            currentMonth = defDate.getTime();
+            currentMonth = new Date();
         }
-        return currentMonth;
+        Calendar defDate = Calendar.getInstance();
+        defDate.setTime(currentMonth);
+        defDate.set(Calendar.DATE, 1);
+        return defDate.getTime();
+    }
+
+    public Date getCurrentMonthEnd() {
+        if ( currentMonth == null ) {
+            currentMonth = new Date();
+        }
+        Calendar defDate = Calendar.getInstance();
+        defDate.setTime(currentMonth);
+        defDate.set(Calendar.DATE, defDate.getActualMaximum(Calendar.DATE));
+        return defDate.getTime();
     }
 
     public void setCurrentMonth(Date month) {
