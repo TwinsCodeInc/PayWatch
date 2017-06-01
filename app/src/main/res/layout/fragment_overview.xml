@@ -6,6 +6,15 @@
     tools:context="cz.muni.fi.paywatch.fragments.OverviewFragment"
     android:id="@+id/fragment_overview">
 
+    <Button
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:id="@+id/month_title" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

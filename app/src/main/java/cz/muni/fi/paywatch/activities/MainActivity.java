@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import cz.muni.fi.paywatch.Constants;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     private BottomNavigationView bottomNavigationView;
     private Menu hamburgerMenu;
     private Integer currentAccountId;
+    private Date currentMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +233,19 @@ public class MainActivity extends AppCompatActivity
     // Returns the currently selected account id
     public Integer getCurrentAccountId() {
         return currentAccountId;
+    }
+
+    public Date getCurrentMonth() {
+        if ( currentMonth == null ) {
+            Calendar defDate = Calendar.getInstance();
+            defDate.set(Calendar.DATE, 1);
+            currentMonth = defDate.getTime();
+        }
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(Date month) {
+        this.currentMonth = month;
     }
 
     // Returns id of the current section / fragment

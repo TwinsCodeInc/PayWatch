@@ -94,4 +94,10 @@
     <string name="note_transfer">Transfer</string>
     <string name="toast_transfer">Money transfered</string>
 
+    <!--Date picker-->
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+
+
 </resources>

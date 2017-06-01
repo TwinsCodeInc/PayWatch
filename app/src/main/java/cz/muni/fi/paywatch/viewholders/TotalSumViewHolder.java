@@ -31,6 +31,7 @@ import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.OverviewAdapter;
 import cz.muni.fi.paywatch.app.RealmController;
+import cz.muni.fi.paywatch.fragments.OverviewFragment;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
 import io.realm.Realm;
@@ -48,10 +49,11 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
 
     public TotalSumViewHolder(View itemView, OverviewAdapter mAdapter) {
         super(itemView);
-
+        mAdapter.activity.getCurrentAccountId();
         realm = Realm.getDefaultInstance();
         try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-01");
+            startDate = mAdapter.activity.getCurrentMonth();
+            //startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-01");
             endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-30");
         } catch (ParseException e) {
             e.printStackTrace();

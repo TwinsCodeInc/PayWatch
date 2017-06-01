@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 
 import cz.muni.fi.paywatch.R;
+import cz.muni.fi.paywatch.activities.MainActivity;
 import cz.muni.fi.paywatch.viewholders.BudgetRatioViewHolder;
 import cz.muni.fi.paywatch.viewholders.CategoriesBarChartViewHolder;
 import cz.muni.fi.paywatch.viewholders.CategoryRatioViewHolder;
@@ -25,13 +26,13 @@ import cz.muni.fi.paywatch.viewholders.TotalSumViewHolder;
  */
 
 public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
+    public MainActivity activity;
     private ArrayList<String> mItemList;
     private AdapterView.OnItemClickListener mOnItemClickListener;
 
 
-    public OverviewAdapter(Context context, ArrayList<String> mItemList) {
-        this.context = context;
+    public OverviewAdapter(MainActivity context, ArrayList<String> mItemList) {
+        this.activity = context;
         this.mItemList = mItemList;
     }
 
@@ -41,35 +42,35 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         RecyclerView.ViewHolder holder;
         switch (viewType) {
             case 0 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_graph, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_graph, parent, false);
                 holder = new LineGraphViewHolder(itemView, this);
                 break;
             case 1 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_category_ratio, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_category_ratio, parent, false);
                 holder = new CategoryRatioViewHolder(itemView, this);
                 break;
             case 2 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_total_sum, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_total_sum, parent, false);
                 holder = new TotalSumViewHolder(itemView, this);
                 break;
             case 3 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_categories_barchart, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_categories_barchart, parent, false);
                 holder = new CategoriesBarChartViewHolder(itemView, this);
                 break;
             case 4 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_total_income_expense, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_total_income_expense, parent, false);
                 holder = new TotalIncomeExpenseViewHolder(itemView, this);
                 break;
             case 5 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_budget, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_budget, parent, false);
                 holder = new BudgetRatioViewHolder(itemView, this);
                 break;
             case 6 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_items, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_items, parent, false);
                 holder = new LastItemsViewHolder(itemView, this);
                 break;
             default:
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_item, parent, false);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_item, parent, false);
                 holder = new DefaultViewHolder(itemView, this);
                 break;
         }
