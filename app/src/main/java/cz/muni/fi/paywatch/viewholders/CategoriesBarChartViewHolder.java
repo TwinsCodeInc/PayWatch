@@ -70,10 +70,10 @@ public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
                      .equalTo("categoryId", category.getId())
                      .greaterThanOrEqualTo("date", startDate)
                      .lessThanOrEqualTo("date", endDate)
-                     .sum("sum").floatValue();
+                     .sum("sum").floatValue() * (-1);
 
              entries.add(new com.github.mikephil.charting.data.BarEntry(category.getId().floatValue(), sum));
-             prediction.add(new com.github.mikephil.charting.data.BarEntry(category.getId().floatValue(), getPrediction(sum)));
+             prediction.add(new com.github.mikephil.charting.data.BarEntry(category.getId().floatValue(), getAverage(category.getId())));
 
          }
 
@@ -86,14 +86,31 @@ public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
         BarData data = new BarData(dataSet, dataSet2);
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.setData(data);
+        chart.groupBars(0.0f, 0.03f, 0.08f);
         chart.getDescription().setEnabled(false);
         chart.invalidate(); // refresh
 
     }
 
-    float getPrediction (float sum) {
-        float daysDiff = ( endDate.getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 );
-        float daysFromStart = ( new Date().getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 );
-        return sum/daysFromStart * daysDiff;
+    float getAverage (int categoryId) {
+
+        float sum = realm.where(Entry.class)
+                .equalTo("categoryId", categoryId )
+                .equalTo("accountId", 0)
+                .sum("sum").floatValue() * (-1);
+
+        if ( sum == 0.0f ) {
+            return 0.0f;
+        }
+        Date firstDate = realm.where(Entry.class)
+                .equalTo("accountId", 0)
+                .minimumDate("date");
+        Date lastDate = realm.where(Entry.class)
+                .equalTo("accountId", 0)
+                .maximumDate("date");
+
+        float daysDiff = ( lastDate.getTime() - firstDate.getTime() ) / ( 24 * 60 * 60 * 1000 ) + 1;
+
+        return sum / daysDiff * 30;
     }
 }
