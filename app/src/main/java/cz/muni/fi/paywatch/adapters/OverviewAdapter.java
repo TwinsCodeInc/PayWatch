@@ -112,7 +112,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return mItemList.size();
+        return 6;
     }
 
     private void configureLineGraphViewHolder(LineGraphViewHolder holder, int position) {
