@@ -11,16 +11,13 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 
 import cz.muni.fi.paywatch.R;
-import cz.muni.fi.paywatch.model.Category;
-import cz.muni.fi.paywatch.model.Entry;
+import cz.muni.fi.paywatch.viewholders.BudgetRatioViewHolder;
 import cz.muni.fi.paywatch.viewholders.CategoriesBarChartViewHolder;
 import cz.muni.fi.paywatch.viewholders.CategoryRatioViewHolder;
 import cz.muni.fi.paywatch.viewholders.DefaultViewHolder;
 import cz.muni.fi.paywatch.viewholders.LastItemsViewHolder;
 import cz.muni.fi.paywatch.viewholders.LineGraphViewHolder;
-import cz.muni.fi.paywatch.viewholders.SumViewHolder;
 import cz.muni.fi.paywatch.viewholders.TotalSumViewHolder;
-import io.realm.RealmResults;
 
 /**
  * Created by Jirka on 01.05.2017.
@@ -62,6 +59,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_categories_barchart, parent, false);
                 holder = new CategoriesBarChartViewHolder(itemView, this);
                 break;
+            case 5 :
+                itemView = LayoutInflater.from(context).inflate(R.layout.overview_budget, parent, false);
+                holder = new BudgetRatioViewHolder(itemView, this);
+                break;
             default:
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_item, parent, false);
                 holder = new DefaultViewHolder(itemView, this);
@@ -91,6 +92,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case 4 :
                 CategoriesBarChartViewHolder holder5 = (CategoriesBarChartViewHolder) holder;
                 configureCategoriesBarChartViewHolder(holder5, position);
+                break;
+            case 5 :
+                BudgetRatioViewHolder holder6 = (BudgetRatioViewHolder) holder;
+                configureBudgetRatioChartViewHolder(holder6, position);
                 break;
             default :
                 CategoryRatioViewHolder holderDef = (CategoryRatioViewHolder) holder;
@@ -128,6 +133,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void configureCategoryRatioViewHolder(CategoryRatioViewHolder holder, int position) {
+
+    }
+
+    private void configureBudgetRatioChartViewHolder(BudgetRatioViewHolder holder, int position) {
 
     }
 
