@@ -17,6 +17,7 @@ import cz.muni.fi.paywatch.viewholders.CategoryRatioViewHolder;
 import cz.muni.fi.paywatch.viewholders.DefaultViewHolder;
 import cz.muni.fi.paywatch.viewholders.LastItemsViewHolder;
 import cz.muni.fi.paywatch.viewholders.LineGraphViewHolder;
+import cz.muni.fi.paywatch.viewholders.TotalIncomeExpenseViewHolder;
 import cz.muni.fi.paywatch.viewholders.TotalSumViewHolder;
 
 /**
@@ -52,16 +53,20 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 holder = new TotalSumViewHolder(itemView, this);
                 break;
             case 3 :
-                itemView = LayoutInflater.from(context).inflate(R.layout.overview_items, parent, false);
-                holder = new LastItemsViewHolder(itemView, this);
-                break;
-            case 4 :
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_categories_barchart, parent, false);
                 holder = new CategoriesBarChartViewHolder(itemView, this);
+                break;
+            case 4 :
+                itemView = LayoutInflater.from(context).inflate(R.layout.overview_total_income_expense, parent, false);
+                holder = new TotalIncomeExpenseViewHolder(itemView, this);
                 break;
             case 5 :
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_budget, parent, false);
                 holder = new BudgetRatioViewHolder(itemView, this);
+                break;
+            case 6 :
+                itemView = LayoutInflater.from(context).inflate(R.layout.overview_items, parent, false);
+                holder = new LastItemsViewHolder(itemView, this);
                 break;
             default:
                 itemView = LayoutInflater.from(context).inflate(R.layout.overview_item, parent, false);
@@ -80,26 +85,26 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 break;
             case 1 :
                 CategoryRatioViewHolder holder2 = (CategoryRatioViewHolder) holder;
-                configureCategoryRatioViewHolder(holder2, position);
                 break;
             case 2 :
                 TotalSumViewHolder holder1 = (TotalSumViewHolder) holder;
                 break;
             case 3 :
-                LastItemsViewHolder holder4 = (LastItemsViewHolder) holder;
-                configureLastItemsViewHolder(holder4, position);
-                break;
-            case 4 :
                 CategoriesBarChartViewHolder holder5 = (CategoriesBarChartViewHolder) holder;
                 configureCategoriesBarChartViewHolder(holder5, position);
                 break;
+            case 4 :
+                TotalIncomeExpenseViewHolder holder7 = (TotalIncomeExpenseViewHolder) holder;
+                break;
             case 5 :
                 BudgetRatioViewHolder holder6 = (BudgetRatioViewHolder) holder;
-                configureBudgetRatioChartViewHolder(holder6, position);
+                break;
+            case 6 :
+                LastItemsViewHolder holder4 = (LastItemsViewHolder) holder;
+                configureLastItemsViewHolder(holder4, position);
                 break;
             default :
                 CategoryRatioViewHolder holderDef = (CategoryRatioViewHolder) holder;
-                configureCategoryRatioViewHolder(holderDef, position);
                 break;
 
         }
@@ -112,14 +117,12 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 7;
     }
 
     private void configureLineGraphViewHolder(LineGraphViewHolder holder, int position) {
         StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
         layoutParams.setFullSpan(true);
-        //Entry entry = mItemList.get(position);
-        //holder.mTitle.setText(entry.getDate().toString());
     }
 
     private void configureLastItemsViewHolder(LastItemsViewHolder holder, int position) {
@@ -130,14 +133,6 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void configureCategoriesBarChartViewHolder(CategoriesBarChartViewHolder holder, int position) {
         StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
         layoutParams.setFullSpan(true);
-    }
-
-    private void configureCategoryRatioViewHolder(CategoryRatioViewHolder holder, int position) {
-
-    }
-
-    private void configureBudgetRatioChartViewHolder(BudgetRatioViewHolder holder, int position) {
-
     }
 
 
