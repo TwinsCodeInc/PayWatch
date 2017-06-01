@@ -51,8 +51,8 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
 
         realm = Realm.getDefaultInstance();
         try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-01");
-            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-05-31");
+            startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-01");
+            endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2017-06-30");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -66,8 +66,13 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
 
     float getDailyExpensePrediction () {
 
-        float sum = realm.where(Entry.class).lessThan("sum", 0.0d).sum("sum").floatValue();
-        float daysDiff = ( new Date().getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 );
+        float sum = realm.where(Entry.class)
+                .lessThan("sum", 0.0d)
+                .equalTo("accountId", 0)
+                .greaterThanOrEqualTo("date", startDate)
+                .lessThanOrEqualTo("date", endDate)
+                .sum("sum").floatValue();
+        float daysDiff = ( new Date().getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 ) + 1;
         float daysToEnd = ( endDate.getTime() - new Date().getTime() ) / ( 24 * 60 * 60 * 1000 );
         return sum / daysDiff * daysToEnd;
     }
