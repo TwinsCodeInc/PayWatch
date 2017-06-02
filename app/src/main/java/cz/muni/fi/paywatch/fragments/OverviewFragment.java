@@ -51,7 +51,7 @@ public class OverviewFragment extends Fragment {
         monthTitle = (TextView) v.findViewById(R.id.month_title);
         Calendar cal = Calendar.getInstance();
         cal.setTime(mainActivity.getCurrentMonthStart());
-        monthTitle.setText( new DateFormatSymbols().getMonths()[cal.get(Calendar.MONTH) - 1] + " " + String.valueOf(cal.get(Calendar.YEAR)) );
+        monthTitle.setText( new DateFormatSymbols().getMonths()[cal.get(Calendar.MONTH)] + " " + String.valueOf(cal.get(Calendar.YEAR)) );
 
         monthTitle.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -61,11 +61,12 @@ public class OverviewFragment extends Fragment {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar tmpCal = Calendar.getInstance();
                         tmpCal.set(Calendar.YEAR, year);
-                        tmpCal.set(Calendar.MONTH, month);
+                        tmpCal.set(Calendar.MONTH, month - 1);
                         tmpCal.set(Calendar.DATE, 1);
                         mainActivity.setCurrentMonth( tmpCal.getTime() );
 
                         monthTitle.setText( new DateFormatSymbols().getMonths()[month - 1] + " " + String.valueOf(year));
+                        refreshControls();
                     }
                 });
                 pd.show(mainActivity.getFragmentManager(), "MonthYearPickerDialog");
@@ -78,21 +79,10 @@ public class OverviewFragment extends Fragment {
         return v;
     }
 
-    private void refreshEntriesList() {
-        //RealmResults<Entry> entries = RealmController.with(this).getEntriesForAccount(mainActivity.getCurrentAccountId());
-        ArrayList<String> cards = new ArrayList<>();
-        cards.add("String 1");
-        cards.add("String 2");
-        cards.add("String 3");
-        cards.add("String 4");
-        //cards.add("String 5");
-        OverviewAdapter adapter = new OverviewAdapter(mainActivity, cards);
-        entryList.setAdapter(adapter);
-    }
-
     // Refresh all the data
     public void refreshControls() {
-        refreshEntriesList();
+        OverviewAdapter adapter = new OverviewAdapter(mainActivity);
+        entryList.setAdapter(adapter);
     }
 
     public static OverviewFragment newInstance() {

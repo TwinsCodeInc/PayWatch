@@ -27,13 +27,9 @@ import cz.muni.fi.paywatch.viewholders.TotalSumViewHolder;
 
 public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public MainActivity activity;
-    private ArrayList<String> mItemList;
-    private AdapterView.OnItemClickListener mOnItemClickListener;
 
-
-    public OverviewAdapter(MainActivity context, ArrayList<String> mItemList) {
+    public OverviewAdapter(MainActivity context) {
         this.activity = context;
-        this.mItemList = mItemList;
     }
 
     @Override

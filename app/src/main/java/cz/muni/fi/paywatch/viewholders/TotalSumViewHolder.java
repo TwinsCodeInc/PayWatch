@@ -57,10 +57,16 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
         endDate = mAdapter.activity.getCurrentMonthEnd();
         realm = Realm.getDefaultInstance();
 
+        Date actualDate = new Date();
+        if ( new Date().after(endDate) ) {
+            actualDate = endDate;
+        }
+
         TextView totalSumView = (TextView) itemView.findViewById(R.id.totalSum);
         TextView totalSumPredictionView = (TextView) itemView.findViewById(R.id.totalSumPrediction);
         float totalSum = realm.where(Entry.class)
                 .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
+                .lessThanOrEqualTo("date", actualDate)
                 .sum("sum").floatValue();
         totalSumView.setText(Float.toString(totalSum));
         totalSumPredictionView.setText(Float.toString(totalSum + getDailyExpensePrediction() ));
@@ -76,6 +82,7 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
                 .sum("sum").floatValue();
         float daysDiff = ( new Date().getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 ) + 1;
         float daysToEnd = ( endDate.getTime() - new Date().getTime() ) / ( 24 * 60 * 60 * 1000 );
+        daysToEnd = daysToEnd > 0 ? daysToEnd : 0;
         return sum / daysDiff * daysToEnd;
     }
 }
