@@ -32,6 +32,7 @@ import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.OverviewAdapter;
 import cz.muni.fi.paywatch.app.RealmController;
 import cz.muni.fi.paywatch.fragments.OverviewFragment;
+import cz.muni.fi.paywatch.model.Account;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
 import io.realm.Realm;
@@ -68,8 +69,12 @@ public class TotalSumViewHolder extends RecyclerView.ViewHolder {
                 .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
                 .lessThanOrEqualTo("date", actualDate)
                 .sum("sum").floatValue();
-        totalSumView.setText(Float.toString(totalSum));
-        totalSumPredictionView.setText(Float.toString(totalSum + getDailyExpensePrediction() ));
+        String currency = realm.where(Account.class)
+                .equalTo("id", mAdapter.activity.getCurrentAccountId() )
+                .findFirst().getCurrency();
+
+        totalSumView.setText(Float.toString(totalSum) + " " + currency);
+        totalSumPredictionView.setText(Float.toString(totalSum + getDailyExpensePrediction()) + " " + currency);
     }
 
     float getDailyExpensePrediction () {

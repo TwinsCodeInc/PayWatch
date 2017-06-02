@@ -32,6 +32,7 @@ import cz.muni.fi.paywatch.Constants;
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.adapters.OverviewAdapter;
 import cz.muni.fi.paywatch.app.RealmController;
+import cz.muni.fi.paywatch.model.Account;
 import cz.muni.fi.paywatch.model.Category;
 import cz.muni.fi.paywatch.model.Entry;
 import io.realm.Realm;
@@ -70,9 +71,14 @@ public class TotalIncomeExpenseViewHolder extends RecyclerView.ViewHolder {
                 .lessThan("sum",0.0d)
                 .sum("sum").floatValue() * (-1);
         float totalDifferenceSum = totalIncomeSum - totalExpenseSum;
-        totalIncomeSumPredictionView.setText(Float.toString(totalIncomeSum));
-        totalExpenseSumView.setText(Float.toString(totalExpenseSum));
-        totalDifferenceView.setText(Float.toString(totalDifferenceSum));
+
+        String currency = realm.where(Account.class)
+                .equalTo("id", mAdapter.activity.getCurrentAccountId() )
+                .findFirst().getCurrency();
+
+        totalIncomeSumPredictionView.setText(Float.toString(totalIncomeSum) + " " + currency);
+        totalExpenseSumView.setText(Float.toString(totalExpenseSum) + " " + currency);
+        totalDifferenceView.setText(Float.toString(totalDifferenceSum) + " " + currency);
     }
 
 }

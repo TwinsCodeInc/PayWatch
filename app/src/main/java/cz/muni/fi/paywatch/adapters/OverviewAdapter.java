@@ -42,8 +42,8 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 holder = new LineGraphViewHolder(itemView, this);
                 break;
             case 1 :
-                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_category_ratio, parent, false);
-                holder = new CategoryRatioViewHolder(itemView, this);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_total_income_expense, parent, false);
+                holder = new TotalIncomeExpenseViewHolder(itemView, this);
                 break;
             case 2 :
                 itemView = LayoutInflater.from(activity).inflate(R.layout.overview_total_sum, parent, false);
@@ -54,8 +54,8 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 holder = new CategoriesBarChartViewHolder(itemView, this);
                 break;
             case 4 :
-                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_total_income_expense, parent, false);
-                holder = new TotalIncomeExpenseViewHolder(itemView, this);
+                itemView = LayoutInflater.from(activity).inflate(R.layout.overview_category_ratio, parent, false);
+                holder = new CategoryRatioViewHolder(itemView, this);
                 break;
             case 5 :
                 itemView = LayoutInflater.from(activity).inflate(R.layout.overview_budget, parent, false);
@@ -81,7 +81,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 configureLineGraphViewHolder(holder3, position);
                 break;
             case 1 :
-                CategoryRatioViewHolder holder2 = (CategoryRatioViewHolder) holder;
+                TotalIncomeExpenseViewHolder holder7 = (TotalIncomeExpenseViewHolder) holder;
                 break;
             case 2 :
                 TotalSumViewHolder holder1 = (TotalSumViewHolder) holder;
@@ -91,7 +91,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 configureCategoriesBarChartViewHolder(holder5, position);
                 break;
             case 4 :
-                TotalIncomeExpenseViewHolder holder7 = (TotalIncomeExpenseViewHolder) holder;
+                CategoryRatioViewHolder holder2 = (CategoryRatioViewHolder) holder;
                 break;
             case 5 :
                 BudgetRatioViewHolder holder6 = (BudgetRatioViewHolder) holder;
@@ -103,7 +103,6 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             default :
                 CategoryRatioViewHolder holderDef = (CategoryRatioViewHolder) holder;
                 break;
-
         }
     }
 
@@ -131,7 +130,4 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
         layoutParams.setFullSpan(true);
     }
-
-
-
 }
