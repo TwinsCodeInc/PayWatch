@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.realm.implementation.RealmBarDataSet;
 import com.github.mikephil.charting.data.realm.implementation.RealmLineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -35,15 +36,17 @@ import io.realm.RealmResults;
 
 public class LineGraphViewHolder extends RecyclerView.ViewHolder {
 
+    OverviewAdapter mAdapter;
     LineChart chart;
     float dailyExpensePrediction;
     Realm realm;
     Date startDate = null;
     Date endDate = null;
+    Date actualDate = null;
 
     public LineGraphViewHolder(View itemView, OverviewAdapter mAdapter) {
         super(itemView);
-
+        this.mAdapter = mAdapter;
         chart = (LineChart) itemView.findViewById(R.id.chart);
 
         realm = Realm.getDefaultInstance();
@@ -53,6 +56,10 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
 
         startDate = mAdapter.activity.getCurrentMonthStart();
         endDate = mAdapter.activity.getCurrentMonthEnd();
+        actualDate = new Date();
+        if ( new Date().after(endDate) ) {
+            actualDate = endDate;
+        }
 
         Calendar start = Calendar.getInstance();
         start.setTime(startDate);
@@ -85,27 +92,36 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
             }
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Account balance"); // add entries to dataset
-        dataSet.setDrawFilled(true);
-
-        LineDataSet dataSet2 = new LineDataSet(prediction, "Prediction"); // add entries to dataset
-        dataSet2.setColor(Color.RED);
-        dataSet2.setDrawFilled(true);
-        dataSet2.setFillColor(Color.RED);
-
-
-        LineData data = new LineData(dataSet, dataSet2);
-       /* chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        List<ILineDataSet> dataSets = new ArrayList<>();
+        if ( entries.size() > 0 ) {
+            LineDataSet dataSet = new LineDataSet(entries, "Account balance"); // add entries to dataset
+            dataSet.setDrawFilled(true);
+            dataSets.add(dataSet);
+        }
+        if ( prediction.size() > 0 ) {
+            LineDataSet dataSet2 = new LineDataSet(prediction, "Prediction"); // add entries to dataset
+            dataSet2.setColor(Color.RED);
+            dataSet2.setDrawFilled(true);
+            dataSet2.setFillColor(Color.RED);
+            dataSets.add(dataSet2);
+        }
+        LineData data = new LineData(dataSets/*, dataSet2*/);
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.setData(data);
         chart.getDescription().setEnabled(false);
-        chart.invalidate(); // refresh*/
+        chart.invalidate(); // refresh
 
     }
 
     float getDailyExpensePrediction () {
         if ( dailyExpensePrediction == 0.0f ) {
-            float sum = realm.where(Entry.class).lessThan("sum", 0.0d).sum("sum").floatValue();
-            float daysDiff = ( new Date().getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 );
+            float sum = realm.where(Entry.class)
+                    .equalTo("accountId", mAdapter.activity.getCurrentAccountId() )
+                    .greaterThanOrEqualTo("date", startDate)
+                    .lessThanOrEqualTo("date", actualDate)
+                    .lessThan("sum", 0.0d)
+                    .sum("sum").floatValue();
+            float daysDiff = ( actualDate.getTime() - startDate.getTime() ) / ( 24 * 60 * 60 * 1000 ) + 1;
             dailyExpensePrediction = sum/daysDiff;
         }
         return dailyExpensePrediction;
