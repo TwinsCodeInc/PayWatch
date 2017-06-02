@@ -28,4 +28,10 @@
         android:layout_width="0dp"
         android:layout_weight="0.5" />
 
+    <Button
+        android:id="@+id/item_del_butt"
+        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:background="@android:drawable/ic_delete" />
+
 </LinearLayout>
