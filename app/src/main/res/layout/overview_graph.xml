@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Balance development"
+            android:text="@string/balance_development"
             android:id="@+id/Title"/>
 
         <com.github.mikephil.charting.charts.LineChart

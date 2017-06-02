@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Inserted items"
+            android:text="@string/inserted_items"
             android:id="@+id/insertedItemsTitle"/>
 
         <ListView

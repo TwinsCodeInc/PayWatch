@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Category ratio"
+            android:text="@string/category_ratio"
             android:id="@+id/categoryRatioTitle"/>
 
         <com.github.mikephil.charting.charts.PieChart

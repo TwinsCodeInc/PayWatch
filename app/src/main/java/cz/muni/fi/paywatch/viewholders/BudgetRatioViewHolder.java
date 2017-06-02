@@ -66,8 +66,8 @@ public class BudgetRatioViewHolder extends RecyclerView.ViewHolder {
                 .getAccount(mAdapter.activity.getCurrentAccountId())
                 .getBudget().floatValue() - totalSum, 0);
 
-        entries.add(new com.github.mikephil.charting.data.PieEntry(totalSum, "Spent"));
-        entries.add(new com.github.mikephil.charting.data.PieEntry(rest, "Rest"));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(totalSum, R.string.budget_spent));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(rest, R.string.budget_rest));
 
 
         PieDataSet dataSet = new PieDataSet(entries, null); // add entries to dataset

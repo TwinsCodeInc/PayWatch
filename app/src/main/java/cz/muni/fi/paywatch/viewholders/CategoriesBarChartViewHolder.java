@@ -88,9 +88,9 @@ public class CategoriesBarChartViewHolder extends RecyclerView.ViewHolder {
 
          }
 
-        BarDataSet dataSet = new BarDataSet(entries, "Reality"); // add entries to dataset
+        BarDataSet dataSet = new BarDataSet(entries, mAdapter.activity.getResources().getString(R.string.bar_chart_reality)); // add entries to dataset
 
-        BarDataSet dataSet2 = new BarDataSet(prediction, "Month average"); // add entries to dataset
+        BarDataSet dataSet2 = new BarDataSet(prediction, mAdapter.activity.getResources().getString(R.string.bar_chart_average) ); // add entries to dataset
         dataSet2.setColor(Color.RED);
 
         final String[] labels = new String[categoryNames.size()];

@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Budget spending"
+            android:text="@string/budget_spending"
             android:id="@+id/budgetRatioTitle"/>
 
         <com.github.mikephil.charting.charts.PieChart

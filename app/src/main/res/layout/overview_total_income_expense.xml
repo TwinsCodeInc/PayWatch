@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Month balance"
+            android:text="@string/month_difference"
             android:id="@+id/totalDifferenceSumTitle"/>
 
         <TextView
@@ -41,7 +41,7 @@
             android:textSize="12sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Total income"
+            android:text="@string/total_income"
             android:id="@+id/totalIncomeTitle"/>
 
         <TextView
@@ -63,7 +63,7 @@
             android:focusable="false"
             android:color="@android:color/holo_red_dark"
             android:textAlignment="center"
-            android:text="Total expense"
+            android:text="@string/total_expense"
             android:id="@+id/totalExpenseSumTitle"/>
 
         <TextView

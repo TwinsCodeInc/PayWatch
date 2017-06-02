@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:focusable="false"
             android:textAlignment="center"
-            android:text="Categories overview"
+            android:text="@string/categories_overview"
             android:id="@+id/categories_bars_title"/>
 
         <com.github.mikephil.charting.charts.BarChart

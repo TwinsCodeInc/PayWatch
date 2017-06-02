@@ -94,12 +94,12 @@ public class LineGraphViewHolder extends RecyclerView.ViewHolder {
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         if ( entries.size() > 0 ) {
-            LineDataSet dataSet = new LineDataSet(entries, "Account balance"); // add entries to dataset
+            LineDataSet dataSet = new LineDataSet(entries, mAdapter.activity.getResources().getString(R.string.line_chart_balance)); // add entries to dataset
             dataSet.setDrawFilled(true);
             dataSets.add(dataSet);
         }
         if ( prediction.size() > 0 ) {
-            LineDataSet dataSet2 = new LineDataSet(prediction, "Prediction"); // add entries to dataset
+            LineDataSet dataSet2 = new LineDataSet(prediction, mAdapter.activity.getResources().getString(R.string.line_chart_prediction)); // add entries to dataset
             dataSet2.setColor(Color.RED);
             dataSet2.setDrawFilled(true);
             dataSet2.setFillColor(Color.RED);

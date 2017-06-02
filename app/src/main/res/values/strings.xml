@@ -98,6 +98,22 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
-
+    <!-- Overview Labels -->
+    <string name="budget_spent">Spent</string>
+    <string name="budget_rest">Rest</string>
+    <string name="bar_chart_reality">Reality</string>
+    <string name="bar_chart_average">Average</string>
+    <string name="line_chart_balance">Account balance</string>
+    <string name="line_chart_prediction">Prediction</string>
+    <string name="budget_spending">Budget spending</string>
+    <string name="categories_overview">Categories overview</string>
+    <string name="category_ratio">Category ratio</string>
+    <string name="balance_development">Balance development</string>
+    <string name="inserted_items">Inserted items</string>
+    <string name="month_difference">Month balance</string>
+    <string name="total_income">Total income</string>
+    <string name="total_expense">Total expense</string>
+    <string name="actual_balance">Actual balance</string>
+    <string name="predicted_balance">Predicted balance</string>
 
 </resources>
