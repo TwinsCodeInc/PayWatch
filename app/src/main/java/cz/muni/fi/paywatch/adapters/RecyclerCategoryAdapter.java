@@ -102,6 +102,10 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
         } else {
             holder.icon.setChecked(true);
         }
+        if ( holder.getAdapterPosition() == 0 ) {
+            holder.icon.setChecked(true);
+            selectedPos = 0;
+        }
     }
 
     // Returns the icon name of selected item
