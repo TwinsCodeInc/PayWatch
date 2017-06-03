@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cz.muni.fi.paywatch.R;
 import cz.muni.fi.paywatch.app.Helpers;
@@ -26,6 +29,7 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
     TextView txtThird;
     TextView txtFourth;
     Activity activity;
+    ListView listView;
     OrderedRealmCollection<Entry> results;
 
     public EntryAdapter(Activity activity, OrderedRealmCollection<Entry> realmResults) {
@@ -55,9 +59,20 @@ public class EntryAdapter extends RealmBaseAdapter<Entry> implements ListAdapter
 
         LayoutInflater inflater=activity.getLayoutInflater();
 
+        listView = (ListView) activity.findViewById(R.id.listViewItems);
         if(convertView == null){
 
             convertView=inflater.inflate(R.layout.overview_item, null);
+            Button deleteImageView = (Button) convertView.findViewById(R.id.item_del_butt);
+            deleteImageView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    int position = listView.getPositionForView((View) v.getParent());
+                    float id = results.get(position).getId();
+                    RealmController.with(activity).removeEntry(id);
+                    Toast.makeText(activity, "Entry deleted", Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                }
+            });
 
             txtFirst=(TextView) convertView.findViewById(R.id.item_date);
             txtSecond=(TextView) convertView.findViewById(R.id.item_note);

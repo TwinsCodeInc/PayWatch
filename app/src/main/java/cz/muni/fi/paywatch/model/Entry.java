@@ -60,6 +60,8 @@ public class Entry extends RealmObject {
 
     public Date getDate() { return date; }
 
+    public float getId() { return id; }
+
     public void setSum(Double sum) {
         this.sum = sum;
     }

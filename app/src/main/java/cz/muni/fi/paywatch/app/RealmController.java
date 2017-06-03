@@ -250,6 +250,15 @@ public class RealmController {
         realm.commitTransaction();
     }
 
+    public void removeEntry(float id) {
+        realm.beginTransaction();
+        RealmResults<Entry> entry = realm.where(Entry.class)
+                .equalTo("id", id)
+                .findAll();
+        entry.deleteAllFromRealm();
+        realm.commitTransaction();
+    }
+
     // Returns count of entries withinn requested account
     public int getEntriesCountForAccount(Integer id) {
         RealmResults<Entry> resultEntries = realm.where(Entry.class).equalTo("accountId", id).findAll();
