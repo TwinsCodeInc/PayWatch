@@ -242,6 +242,10 @@ public class MainActivity extends AppCompatActivity
         Calendar defDate = Calendar.getInstance();
         defDate.setTime(currentMonth);
         defDate.set(Calendar.DATE, 1);
+        defDate.set(Calendar.MILLISECOND, 0);
+        defDate.set(Calendar.SECOND, 0);
+        defDate.set(Calendar.MINUTE, 0);
+        defDate.set(Calendar.HOUR_OF_DAY, 0);
         return defDate.getTime();
     }
 
@@ -252,6 +256,10 @@ public class MainActivity extends AppCompatActivity
         Calendar defDate = Calendar.getInstance();
         defDate.setTime(currentMonth);
         defDate.set(Calendar.DATE, defDate.getActualMaximum(Calendar.DATE));
+        defDate.set(Calendar.MILLISECOND, 999);
+        defDate.set(Calendar.SECOND, 59);
+        defDate.set(Calendar.MINUTE, 59);
+        defDate.set(Calendar.HOUR_OF_DAY, 23);
         return defDate.getTime();
     }
 
