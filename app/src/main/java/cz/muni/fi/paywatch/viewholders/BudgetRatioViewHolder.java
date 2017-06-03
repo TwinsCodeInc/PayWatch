@@ -65,13 +65,15 @@ public class BudgetRatioViewHolder extends RecyclerView.ViewHolder {
         float rest = Math.max(RealmController.getInstance()
                 .getAccount(mAdapter.activity.getCurrentAccountId())
                 .getBudget().floatValue() - totalSum, 0);
+        String spent = mAdapter.activity.getResources().getString(R.string.budget_spent);
+        String restString = mAdapter.activity.getResources().getString(R.string.budget_rest);
+        entries.add(new com.github.mikephil.charting.data.PieEntry(totalSum, spent));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(rest, restString));
 
-        entries.add(new com.github.mikephil.charting.data.PieEntry(totalSum, R.string.budget_spent));
-        entries.add(new com.github.mikephil.charting.data.PieEntry(rest, R.string.budget_rest));
-
-
+        int colorSpent = mAdapter.activity.getResources().getColor(R.color.blue);
+        int colorRest = mAdapter.activity.getResources().getColor(R.color.red);
         PieDataSet dataSet = new PieDataSet(entries, null); // add entries to dataset
-        dataSet.setColors(new int[] {R.color.red, R.color.blue});
+        dataSet.setColors(new int[] {colorSpent, colorRest});
         PieData data = new PieData(dataSet);
         chart.setData(data);
         //chart.setHoleRadius(50.0f);
