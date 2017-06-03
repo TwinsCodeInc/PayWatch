@@ -45,7 +45,7 @@ public class OverviewFragment extends Fragment {
 
         // Find views by ID
         entryList = (RecyclerView) v.findViewById(R.id.recycler_view);
-        entryList.setHasFixedSize(true);
+        entryList.setHasFixedSize(false);
         entryList.setLayoutManager(new StaggeredGridLayoutManager(2,1));
 
         monthTitle = (TextView) v.findViewById(R.id.month_title);

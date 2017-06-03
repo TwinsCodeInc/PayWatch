@@ -23,14 +23,14 @@
             android:text="@string/inserted_items"
             android:id="@+id/insertedItemsTitle"/>
 
-        <ListView
+        <cz.muni.fi.paywatch.custom.AdaptiveListView
             android:id="@+id/listViewItems"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:scrollbars="vertical">
-        </ListView>
+            >
+        </cz.muni.fi.paywatch.custom.AdaptiveListView>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
